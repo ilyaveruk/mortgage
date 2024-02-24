@@ -1,0 +1,157 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+ 
+.wrapper {
+  background-color: #ffffff;
+  width: 400px;
+  height: 440px;
+  position: relative;
+  border: 2px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.signup-wrapper {
+  background-color: #ffffff;
+  width: 450px;
+  height: 610px;
+  position: relative;
+  border: 2px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.wrapper .form-box {
+  width: 100%;
+  padding: 40px;
+}
+.signup-wrapper .form-box {
+  width: 100%;
+  padding: 30px;
+}
+.form-box h1 {
+  font-size: 1.5em;
+  text-align: center;
+  color: #333; /* Dark text color */
+  margin: 10px;
+}
+.input-box {
+  position: relative;
+  width: 95%;
+  height: 50px;
+  border-bottom: 2px solid;
+  margin: 30px 0;
+}
+.input-box label {
+  direction: rtl;
+  position: absolute;
+  top: 50%;
+  right: 0px; /* Adjust the left position based on your needs */
+  transform: translateY(-30%);
+  font-size: 1em;
+  font-weight: 600;
+  pointer-events: none;
+  color: black;
+  transition: 0.5s;
+}
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+  top: -3px;
+}
+.custom-input:focus {
+    border-color: initial; /* or any other desired color or 'initial' to remove it */
+    box-shadow: none; /* Remove box shadow if present */
+  }
+.input-box input {
+  direction: rtl;
+  width: calc(100%); /* Adjust width to accommodate the icon */
+  height: 100%;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  font-weight: 500;
+  padding: 0 0px 0 65px; /* Adjust padding to create space for the icon */
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.input-box .icon {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2em;
+  line-height: 57px;
+}
+.remember-forget {
+  font-size: 1em;
+  width: 95%;
+  margin: -calc() 0 25px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.remember-forget label {
+  direction: rtl;
+  font-weight: 600;
+}
+.remember-forget a {
+  font-weight: 600;
+  text-decoration: none;
+  color: blue;
+}
+.remember-forget a:hover {
+  text-decoration: underline;
+}
+.form-group {
+  color: black;
+}
+.btn {
+  width: 90%;
+  height: 40px;
+  background-image: linear-gradient(-180deg, #37aee2 0%, #1e96c8 100%);
+  border-radius: 0.5rem;
+  color: #ffffff;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+  margin: auto;
+  border: 0;
+  cursor: pointer;
+}
+.btn:hover {
+  background-image: linear-gradient(-180deg, #1d95c9 0%, #17759c 100%);
+}
+.endForm-div {
+  font-size: 1em;
+  color: black;
+  text-align: center;
+  font-weight: 500;
+  margin: 30px 0 10px;
+}
+.endForm-div p a {
+  text-decoration: none;
+  font-weight: 600;
+  color: blue;
+}
+.endForm-div p a:hover {
+  text-decoration: underline;
+}

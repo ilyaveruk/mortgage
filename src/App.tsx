@@ -6,6 +6,7 @@ import MultipleLoan from "./components/Loans/MultipleLoan";
 import SingleLoan from "./components/Loans/SingleLoan";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Homepage from "./components/Homepage/Homepage";
+import Login from "./components/Login/Login";
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                     <Route path="/" element={<Dashboard><Homepage/></Dashboard>}/>
                     <Route path="/single-loan" element={<Dashboard><SingleLoan/></Dashboard>}/>
                     <Route path="/multiple-loan" element={<Dashboard><MultipleLoan/></Dashboard>}/>
+                    <Route path="/login" element={<Dashboard><Login/></Dashboard>}/>
                 </Routes>
             </BrowserRouter>
 
