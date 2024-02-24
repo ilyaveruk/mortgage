@@ -1,14 +1,24 @@
 import React from 'react';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import Dashboard from "./components/Dashboard/Dashboard";
+import MultipleLoan from "./components/Loans/MultipleLoan";
+import SingleLoan from "./components/Loans/SingleLoan";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 function App() {
-  return (
-    <div className="App">
-     {/*TODO: Here you can add your components*/}
+    return (
+        <div className="App">
+            {/*TODO: Here you can add your components*/}
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/single-loan" element={<Dashboard><SingleLoan/></Dashboard>}/>
+                    <Route path="/multiple-loan" element={<Dashboard><MultipleLoan/></Dashboard>}/>
+                </Routes>
+            </BrowserRouter>
 
-    </div>
-  );
+        </div>
+    );
 }
 
 export default App;
