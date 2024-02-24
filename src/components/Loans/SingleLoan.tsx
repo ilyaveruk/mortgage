@@ -23,7 +23,7 @@ const SingleLoan = () => {
         <div>
             <Form>
                 <Row>
-                    <Col>
+                    <Col xs={12} md={6}>
                         <Form.Group className="m-5">
                             <Form.Label>שם בנק בו מתנהל חשבונך</Form.Label>
                             <Form.Select>
@@ -40,8 +40,7 @@ const SingleLoan = () => {
                             </Form.Select>
                         </Form.Group>
                     </Col>
-                    <Col>
-
+                    <Col xs={12} md={6}>
                         <Form.Group className="m-5">
                             <Form.Label>כמה כסף אתה מעוניין להלוות ?</Form.Label>
                             <Form.Range min="0" max="100000" step="1000" value={loanAmount}
@@ -51,7 +50,7 @@ const SingleLoan = () => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
+                    <Col  xs={12} md={6}>
                         <Form.Group className="m-5">
                             <Form.Label>בחר שיטת החזר רצויה</Form.Label>
                             <Form.Select>
@@ -100,7 +99,7 @@ const SingleLoan = () => {
                     <Col>
                     </Col>
                 </Row>
-                <Button variant="primary" type="submit" disabled={!isFormComplete()}>
+                <Button variant="primary" type="submit" disabled={!isFormComplete()} className="mt-5">
                     חשב
                 </Button>
             </Form>

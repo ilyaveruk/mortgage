@@ -1,0 +1,16 @@
+.navbar-left {
+    justify-content: flex-start !important;
+}
+
+.col-shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+}
+
+.col-sm-height {
+    height: 100vh;
+}
+@media (max-width: 990px) {
+    .col-sm-height {
+        height: 40vh;
+    }
+}
