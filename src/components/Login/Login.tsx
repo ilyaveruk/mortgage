@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import { Container, Form, FormControl, Button } from "react-bootstrap";
 import { FaLock } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import { MdPerson, MdCall, MdMail, MdLock } from "react-icons/md";
 import "./Login.css";
+import { UserContext } from '../Context/UserContext'; // import the context
+import { useNavigate } from "react-router-dom";
+
+
+
 
 const Login = () => {
     const [mode, setMode] = useState("login");
-
+    const { setUsername } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const validateLogin = (event: React.FormEvent<HTMLFormElement>): void => {
         // Prevent the default form submission behavior
@@ -33,10 +39,11 @@ const Login = () => {
             return;
         }
 
-        // If validation passes, show user input in alert
-        alert(
-            `Login successful!\nEmail: ${emailValue}\nPassword: ${passwordValue}`
-        );
+        setUsername(emailValue);
+
+        navigate("/");
+
+
     };
 
     const validateSignUp = (event: React.FormEvent<HTMLFormElement>) => {

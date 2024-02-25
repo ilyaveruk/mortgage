@@ -1,15 +1,17 @@
-import React, {ReactNode, useState} from 'react';
+import React, {ReactNode, useContext, useState} from 'react';
 import {Navbar, Nav, NavDropdown, Offcanvas, Button} from 'react-bootstrap';
 import {FaBars, FaHome, FaUser} from 'react-icons/fa';
 import {Link} from "react-router-dom";
 import './Dashboard.css';
+import {UserContext} from "../Context/UserContext";
 
 interface DashboardProps {
     children: ReactNode;
 }
 
 const Dashboard: React.FC<DashboardProps> = ({children}) => {
-    const username = 'ilyaveruk'; // Replace this with the actual username
+    // Replace this with the actual username
+    const {username} = useContext(UserContext);
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -17,17 +19,19 @@ const Dashboard: React.FC<DashboardProps> = ({children}) => {
     return (
         <div>
             <Navbar variant="light" className="p-4 shadow">
-                <Button variant="primary" onClick={handleShow} style={{ marginLeft: 'auto' }}>
+                <Button variant="primary" onClick={handleShow} style={{marginLeft: 'auto'}}>
                     <FaBars/>
                 </Button>
-                <Navbar.Text style={{fontSize: 18, fontWeight: "bold"}}>{username} <FaUser size={24}/></Navbar.Text>
+                <Navbar.Text style={{fontSize: 18, fontWeight: "bold"}}>{username ? username : 'משתמש אנונימי'} <FaUser
+                    size={24}/></Navbar.Text>
+                {username ? <></> : <Button variant="outline-success" className="mx-3" href="/login">התחבר</Button>}
             </Navbar>
             <div style={{display: 'flex', flexDirection: 'row', margin: 20}}>
                 <div style={{flex: 1}}>
                     {children}
                 </div>
                 <Offcanvas show={show} onHide={handleClose} bg="primary" placement="end">
-                    <Offcanvas.Header >
+                    <Offcanvas.Header>
                         <Offcanvas.Title>
                             <FaHome/> תפריט
                         </Offcanvas.Title>
