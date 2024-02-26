@@ -4,10 +4,13 @@ import m1 from "../../Assets/images/mortgage1.jpg";
 import m2 from "../../Assets/images/mortgage2.jpg";
 import m3 from "../../Assets/images/mortgage3.jpg";
 import './Homepage.css';
+import Divider from "../Utils/Divider";
 
 const Homepage = () => {
     return (
         <Container>
+            <h1 className="text-center p-3">ברוכים הבאים לאתר המשכנתאות שלנו</h1>
+            <Divider/>
             <Carousel style={{color:"#000000" }}>
                 <Carousel.Item>
                     <img

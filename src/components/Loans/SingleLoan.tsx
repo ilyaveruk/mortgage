@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Form, Button, Row, Col} from 'react-bootstrap';
-// import pdf from "../../Assets/";
 import pdfFile from "../../Assets/file_pdf.pdf"
+import Divider from "../Utils/Divider";
 
 const SingleLoan = () => {
     const [loanAmount, setLoanAmount] = useState(0);
@@ -21,6 +21,8 @@ const SingleLoan = () => {
 
     return (
         <div>
+            <h1 className="text-center p-3">הלוואה פרטית</h1>
+            <Divider/>
             <Form>
                 <Row>
                     <Col xs={12} md={6}>
@@ -99,7 +101,7 @@ const SingleLoan = () => {
                     <Col>
                     </Col>
                 </Row>
-                <Button variant="primary" type="submit" disabled={!isFormComplete()} className="mt-5">
+                <Button variant="primary" type="submit" disabled={!isFormComplete()} className="mt-5"  style={{width: "100px"}}>
                     חשב
                 </Button>
             </Form>
