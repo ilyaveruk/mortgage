@@ -40,7 +40,7 @@ const Login = () => {
         }
 
         setUsername(emailValue);
-
+        localStorage.setItem('username', emailValue);
         navigate("/");
 
 

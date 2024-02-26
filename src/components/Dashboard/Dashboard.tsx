@@ -1,4 +1,4 @@
-import React, {ReactNode, useContext, useState} from 'react';
+import React, {ReactNode, useContext, useEffect, useState} from 'react';
 import {Navbar, Nav, NavDropdown, Offcanvas, Button} from 'react-bootstrap';
 import {FaBars, FaHome, FaUser} from 'react-icons/fa';
 import {Link} from "react-router-dom";
@@ -11,20 +11,31 @@ interface DashboardProps {
 
 const Dashboard: React.FC<DashboardProps> = ({children}) => {
     // Replace this with the actual username
-    const {username} = useContext(UserContext);
+    let username = localStorage.getItem('username');
     const [show, setShow] = useState(false);
+
+    useEffect(() => {
+        username = localStorage.getItem('username');
+    }, [username]);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const handleLogout = () => {
+        localStorage.removeItem('username');
+        window.location.reload();
+    };
     return (
         <div>
             <Navbar variant="light" className="p-4 shadow">
                 <Button variant="primary" onClick={handleShow} style={{marginLeft: 'auto'}}>
                     <FaBars/>
                 </Button>
-                <Navbar.Text style={{fontSize: 18, fontWeight: "bold"}}>{username ? username : 'משתמש אנונימי'} <FaUser
-                    size={24}/></Navbar.Text>
-                {username ? <></> : <Button variant="outline-success" className="mx-3" href="/login">התחבר</Button>}
+                <Navbar.Text style={{fontSize: 18, fontWeight: "bold"}}>{username ? username
+                    : 'משתמש אנונימי'} <FaUser
+                    size={24}/>
+                </Navbar.Text>
+                {username ? <Button variant="outline-danger" className="mx-3" onClick={handleLogout}>Logout</Button> :
+                            <Button variant="outline-success" className="mx-3" href="/login">התחבר</Button>}
             </Navbar>
             <div style={{display: 'flex', flexDirection: 'row', margin: 20}}>
                 <div style={{flex: 1}}>
