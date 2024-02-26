@@ -8,7 +8,10 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Homepage from "./components/Homepage/Homepage";
 import Login from "./components/Login/Login";
 import ContactUs from "./components/ContactUs/ContactUs";
-import {UserContext} from './components/Context/UserContext'; // import the context
+import {UserContext} from './components/Context/UserContext';
+import MortgageTable from "./components/Mortgages/MortgageTable";
+import MortgagePage from "./components/Mortgages/MortgagePage";
+import MortgageForm from "./components/Mortgages/MortgageForm"; // import the context
 
 
 function App() {
@@ -25,6 +28,8 @@ function App() {
                         <Route path="/multiple-loan" element={<Dashboard><MultipleLoan/></Dashboard>}/>
                         <Route path="/login" element={<Dashboard><Login/></Dashboard>}/>
                         <Route path="/contact-us" element={<Dashboard><ContactUs/></Dashboard>}/>
+                        <Route path={"/check-loan"} element={<Dashboard><MortgagePage><MortgageForm/></MortgagePage></Dashboard>}/>
+                        <Route path={"/profitability-table"} element={<Dashboard><MortgagePage><MortgageTable/></MortgagePage></Dashboard>}/>
                     </Routes>
                 </BrowserRouter>
             </div>
