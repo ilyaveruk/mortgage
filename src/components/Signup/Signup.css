@@ -6,20 +6,6 @@
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
-
-.wrapper {
-    background-color: #ffffff;
-    width: 400px;
-    height: 440px;
-    position: relative;
-    border: 2px;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
 .signup-wrapper {
     background-color: #ffffff;
     width: 450px;
@@ -33,9 +19,9 @@
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
     text-align: center;
 }
-.wrapper .form-box {
+.signup-wrapper .form-box {
     width: 100%;
-    padding: 40px;
+    padding: 30px;
 }
 .form-box h1 {
     font-size: 1.5em;
@@ -96,25 +82,6 @@ input[type="number"] {
     transform: translateY(-50%);
     font-size: 1.2em;
     line-height: 57px;
-}
-.remember-forget {
-    font-size: 1em;
-    width: 95%;
-    display: flex;
-    justify-content: space-between;
-    margin: 0 0 30px;
-}
-.remember-forget label {
-    direction: rtl;
-    font-weight: 600;
-}
-.remember-forget a {
-    font-weight: 600;
-    text-decoration: none;
-    color: blue;
-}
-.remember-forget a:hover {
-    text-decoration: underline;
 }
 .form-group {
     color: black;

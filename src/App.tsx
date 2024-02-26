@@ -6,22 +6,38 @@ import MultipleLoan from "./components/Loans/MultipleLoan";
 import SingleLoan from "./components/Loans/SingleLoan";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Homepage from "./components/Homepage/Homepage";
+import Login from "./components/Login/Login";
+import Signup from "./components/Signup/Signup";
+import PassRecovery from "./components/PassRecovery/PassRecovery";
+import ContactUs from "./components/ContactUs/ContactUs";
+import {UserContext} from './components/Context/UserContext';
+import MortgageTable from "./components/Mortgages/MortgageTable";
+import MortgagePage from "./components/Mortgages/MortgagePage";
+import MortgageForm from "./components/Mortgages/MortgageForm"; // import the context
+
 
 function App() {
     const [username, setUsername] = useState('');
 
     return (
-        <div className="App">
-            {/*TODO: Here you can add your components*/}
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Dashboard><Homepage/></Dashboard>}/>
-                    <Route path="/single-loan" element={<Dashboard><SingleLoan/></Dashboard>}/>
-                    <Route path="/multiple-loan" element={<Dashboard><MultipleLoan/></Dashboard>}/>
-                </Routes>
-            </BrowserRouter>
-
-        </div>
+        <UserContext.Provider value={{username, setUsername}}>
+            <div className="App">
+                {/*TODO: Here you can add your components*/}
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<Dashboard><Homepage/></Dashboard>}/>
+                        <Route path="/single-loan" element={<Dashboard><SingleLoan/></Dashboard>}/>
+                        <Route path="/multiple-loan" element={<Dashboard><MultipleLoan/></Dashboard>}/>
+                        <Route path="/login" element={<Dashboard><Login/></Dashboard>}/>
+                        <Route path="/signup" element={<Dashboard><Signup/></Dashboard>}/>
+                        <Route path="/password-recovery" element={<Dashboard><PassRecovery/></Dashboard>}/>
+                        <Route path="/contact-us" element={<Dashboard><ContactUs/></Dashboard>}/>
+                        <Route path={"/check-loan"} element={<Dashboard><MortgagePage><MortgageForm/></MortgagePage></Dashboard>}/>
+                        <Route path={"/profitability-table"} element={<Dashboard><MortgagePage><MortgageTable/></MortgagePage></Dashboard>}/>
+                    </Routes>
+                </BrowserRouter>
+            </div>
+        </UserContext.Provider>
     );
 }
 
