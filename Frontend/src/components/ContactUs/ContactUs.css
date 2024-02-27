@@ -1,22 +1,31 @@
+@media (min-width: 990px) {
+    .custom-form {
+        background-color: rgba(73, 117, 118, 0.2); /* Change this to your desired color */
+        border-radius: 10px; /* Adjust this to your desired radius */
+        padding: 20px; /* Optional: Add some padding inside the form */
+        width: 50%; /* Adjust this to your desired width */
+        margin: 0 auto; /* This will center the form */
+    }
+}
+
 .custom-form {
-    background-color:rgba(73, 117, 118, 0.2); /* Change this to your desired color */
+    background-color: rgba(73, 117, 118, 0.2); /* Change this to your desired color */
     border-radius: 10px; /* Adjust this to your desired radius */
     padding: 20px; /* Optional: Add some padding inside the form */
-    width: 50%; /* Adjust this to your desired width */
     margin: 0 auto; /* This will center the form */
 }
 
-.custom-btn-contact{
+.custom-btn-contact {
     background-color: rgba(73, 117, 118, 1.0);
     border-color: rgba(73, 117, 118, 1.0);
 }
 
-.custom-btn-contact:hover{
+.custom-btn-contact:hover {
     background-color: rgba(73, 117, 118, 0.5);
     border-color: rgba(73, 117, 118, 0.5);
 }
 
-.custom-btn-contact:disabled{
+.custom-btn-contact:disabled {
     background-color: rgba(73, 117, 118, 0.5);
     border-color: rgba(73, 117, 118, 0.5);
 }

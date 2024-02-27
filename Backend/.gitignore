@@ -21,7 +21,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-/public/logo512.png
-/.idea/modules.xml
-/.idea/inspectionProfiles/Project_Default.xml
 /.idea/vcs.xml

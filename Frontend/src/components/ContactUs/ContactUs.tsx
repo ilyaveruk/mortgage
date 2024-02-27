@@ -49,7 +49,7 @@ const ContactUs: React.FC = () => {
                 info: info,
             }),
         };
-        fetch("http://localhost:3002/sendmail", requestOptions)
+        fetch("http://localhost:3001/sendmail", requestOptions)
             .then((response) => response)
             .then(() => setCheckMail(true))
             .catch(() => {
