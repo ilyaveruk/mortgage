@@ -31,6 +31,7 @@ function App() {
                         <Route path="/signup" element={<Dashboard><Signup/></Dashboard>}/>
                         <Route path="/password-recovery" element={<Dashboard><PassRecovery/></Dashboard>}/>
                         <Route path="/contact-us" element={<Dashboard><ContactUs/></Dashboard>}/>
+                        <Route path="/large-loan" element={<Dashboard><ContactUs/></Dashboard>}/>
                         <Route path="/check-loan" element={<Dashboard><MortgagePage><MortgageForm/></MortgagePage></Dashboard>}/>
                         <Route path="/profitability-table" element={<Dashboard><MortgagePage><MortgageTable/></MortgagePage></Dashboard>}/>
                     </Routes>

@@ -1,11 +1,19 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Form, Button, Row, Col} from 'react-bootstrap';
 import pdfFile from "../../Assets/file_pdf.pdf"
 import Divider from "../Utils/Divider";
+import './SingleLoan.css';
+import {useNavigate} from "react-router-dom";
 
 const SingleLoan = () => {
     const [loanAmount, setLoanAmount] = useState(0);
     const [switchOn, setSwitchOn] = useState(false);
+    const [username, setUsername] = useState('');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        setUsername(localStorage.getItem('username') || '');
+    }, []);
 
     const handleLoanAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLoanAmount(Number(event.target.value));
@@ -16,6 +24,7 @@ const SingleLoan = () => {
     };
 
     const isFormComplete = () => {
+        if (!username) navigate("/login");
         return loanAmount > 0 && switchOn;
     };
 
@@ -23,7 +32,7 @@ const SingleLoan = () => {
         <div>
             <h1 className="text-center p-3">הלוואה פרטית</h1>
             <Divider/>
-            <Form>
+            <Form className="custom-form-loan">
                 <Row>
                     <Col xs={12} md={6}>
                         <Form.Group className="m-5">
@@ -45,15 +54,22 @@ const SingleLoan = () => {
                     <Col xs={12} md={6}>
                         <Form.Group className="m-5">
                             <Form.Label>כמה כסף אתה מעוניין להלוות ?</Form.Label>
-                            <Form.Range min="0" max="100000" step="1000" value={loanAmount}
-                                        onChange={handleLoanAmountChange}/>
-                            <Form.Label>{loanAmount} ש"ח</Form.Label>
+                            <div dir={"ltr"} className="d-flex justify-content-between align-items-center">
+                                <span>0</span>
+                                <Form.Range min="0" max="100000" step="1000" value={loanAmount}
+                                            onChange={handleLoanAmountChange}/>
+                                <span>100000</span>
+                            </div>
+
+                            <div className="text-center mt-2">
+                                <strong>{loanAmount + " ש\"ח"}</strong>
+                            </div>
                         </Form.Group>
                     </Col>
                 </Row>
                 <Row>
-                    <Col  xs={12} md={6}>
-                        <Form.Group className="m-5">
+                    <Col xs={12} md={6}>
+                    <Form.Group className="m-5">
                             <Form.Label>בחר שיטת החזר רצויה</Form.Label>
                             <Form.Select>
                                 <option>ריבית פריים</option>
@@ -101,7 +117,8 @@ const SingleLoan = () => {
                     <Col>
                     </Col>
                 </Row>
-                <Button variant="primary" type="submit" disabled={!isFormComplete()} className="mt-5"  style={{width: "100px"}}>
+                <Button  type="submit" disabled={!isFormComplete()} className="mt-5 custom-btn-single-loan"
+                        style={{width: "100px"}}>
                     חשב
                 </Button>
             </Form>

@@ -1,8 +1,9 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import {Button, Col, Form, Row} from "react-bootstrap";
 import './MortgageForm.css';
 import pdfFile from "../../Assets/file_pdf.pdf";
 import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 /**
  * Mortgage calculation form
@@ -17,6 +18,13 @@ const MortgageForm = () => {
     const [selectedCitizenshipOption, setSelectedCitizenshipOption] = useState("");
     const [loanAmount, setLoanAmount] = useState(50);
     const [switchOn, setSwitchOn] = useState(false);
+    const [username, setUsername] = useState('');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        setUsername(localStorage.getItem('username') || '');
+    }, []);
+
 
     //COMPONENT EVENT HANDLERS
     /**
@@ -63,11 +71,12 @@ const MortgageForm = () => {
      * If the terms & conditions are accepted and the loan amount is valid, returns true
      */
     const isFormComplete = () => {
+        if (!username) navigate("/login");
         return loanAmount > 0 && switchOn;
     };
 
     return (
-        <Form>
+        <Form className="custom-form-mortgage">
             <Row className="mb-3 py-3">
                 <Col>
                     <Form.Group controlId="formPropertyType">
@@ -152,7 +161,7 @@ const MortgageForm = () => {
             </Row>
             <Row>
                 <Col>
-                    <Button variant={"primary"} type={"submit"} disabled={!isFormComplete()}>
+                    <Button className="custom-btn-mortgage" type={"submit"} disabled={!isFormComplete()}>
                         <Link className={"text-white text-decoration-none"} to={"/profitability-table"}>חשב</Link>
                     </Button>
                 </Col>

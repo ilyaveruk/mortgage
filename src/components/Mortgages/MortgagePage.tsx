@@ -7,7 +7,7 @@ interface MortgageProps {
 }
 const MortgagePage: React.FC<MortgageProps> = ({children}) => {
     return (
-        <Container style={{textAlign: "right"}}>
+        <Container >
             <Row>
                 <Col>
                     <h2>מעוניין לקחת משכנתא חדשה</h2>

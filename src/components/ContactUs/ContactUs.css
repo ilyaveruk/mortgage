@@ -1,4 +1,4 @@
-.custom-form-loan{
+.custom-form {
     background-color:rgba(73, 117, 118, 0.2); /* Change this to your desired color */
     border-radius: 10px; /* Adjust this to your desired radius */
     padding: 20px; /* Optional: Add some padding inside the form */
@@ -6,17 +6,19 @@
     margin: 0 auto; /* This will center the form */
 }
 
-.custom-btn-single-loan{
+.custom-btn-contact{
     background-color: rgba(73, 117, 118, 1.0);
     border-color: rgba(73, 117, 118, 1.0);
 }
 
-.custom-btn-single-loan:hover{
+.custom-btn-contact:hover{
     background-color: rgba(73, 117, 118, 0.5);
     border-color: rgba(73, 117, 118, 0.5);
 }
 
-.custom-btn-single-loan:disabled{
+.custom-btn-contact:disabled{
     background-color: rgba(73, 117, 118, 0.5);
     border-color: rgba(73, 117, 118, 0.5);
 }
+
+
