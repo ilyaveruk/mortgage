@@ -5,34 +5,24 @@ import "./Signup.css";
 import { UserContext } from "../Context/UserContext"; // import the context
 import { useNavigate } from "react-router-dom";
 
+let errorDisplayed: boolean = false;
+
 const Signup = () => {
-  const [mode, setMode] = useState("signup");
   const { setUsername } = useContext(UserContext);
   const navigate = useNavigate();
 
   const validateSignUp = (event: React.FormEvent<HTMLFormElement>): void => {
     // Prevent the default form submission behavior
     event.preventDefault();
-
     // Get email and password input elements and values:
-    const emailInput = document.querySelector<HTMLInputElement>(
-      'input[name="email"]'
-    );
+    const emailInput = document.querySelector<HTMLInputElement>('input[name="email"]');
     const emailValue = emailInput?.value || "";
-    const passwordInput = document.querySelector<HTMLInputElement>(
-      'input[type="password"]'
-    );
-    const passwordValue = passwordInput?.value || "";
-
-    // Check if email or password is empty (let the form handle it).
-    if (!emailValue || !passwordValue) return;
-
-    // Perform validation if email and password are according to the rules.
+    // Perform validation if email is according to the rule.
     if (!isValidEmail(emailValue)) {
-      //displayError("Invalid email address", emailInput!);
-      console.log("error email");
+      displayError("Invalid email address", emailInput!);
       return;
     }
+    //TODO: send data to backend 
 
     setUsername(emailValue);
     localStorage.setItem("username", emailValue);
@@ -42,6 +32,31 @@ const Signup = () => {
   // Email validation rules
   function isValidEmail(email: string): boolean {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  // Display timed error message to user
+  function displayError(message: string, inputElement: HTMLElement) {
+    if (!errorDisplayed) {
+      const errorContainer: HTMLDivElement = document.createElement("div");
+      errorContainer.classList.add("error-messages");
+      errorContainer.textContent = message;
+      errorContainer.style.color = "red";
+      errorDisplayed = true;
+  
+      const parentContainer: HTMLElement | null = inputElement.parentElement;
+      
+      if (parentContainer) {
+        parentContainer.appendChild(errorContainer);
+  
+        // Automatically remove the error message after 6 seconds
+        setTimeout(() => {
+          if (errorContainer.parentNode === parentContainer) {
+            parentContainer.removeChild(errorContainer);
+            errorDisplayed = false; // Reset errorDisplayed flag
+          }
+        }, 6000);
+      }
+    }
   }
 
   return (
