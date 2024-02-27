@@ -31,8 +31,11 @@ To run the application locally, follow these steps:
    cd mortgage-web-app
    npm install
   # or
+  ```bash
   yarn install
   npm start
+  ```
   # or
+  ```bash
   yarn start
   ```
