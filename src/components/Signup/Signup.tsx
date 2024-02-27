@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import { Container, Form, FormControl, Button } from "react-bootstrap";
-import { MdMail, MdLock } from "react-icons/md";
-import "./Login.css";
+import { MdPerson, MdCall, MdMail, MdLock } from "react-icons/md";
+import "./Signup.css";
 import { UserContext } from "../Context/UserContext"; // import the context
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Signup = () => {
     const { setUsername } = useContext(UserContext);
     const navigate = useNavigate();
 
-    const validateLogin = (event: React.FormEvent<HTMLFormElement>): void => {
+    const validateSignUp = (event: React.FormEvent<HTMLFormElement>): void => {
         // Prevent the default form submission behavior
         event.preventDefault();
 
@@ -45,53 +45,86 @@ const Login = () => {
 
     return (
         <Container>
-            <Container id="loginWrapper" className="wrapper">
-                <div className="form-box login">
-                    <h1>כניסה לחשבון שלי</h1>
-                    <Form onSubmit={validateLogin}>
+            <Container id="signUpWrapper" className="signup-wrapper">
+                <div className="form-box signin">
+                    <h1>משתמש חדש</h1>
+                    <Form onSubmit={validateSignUp}>
                         <div className="input-box">
+              <span className="icon">
+                <MdPerson />
+              </span>
                             <FormControl
                                 type="text"
+                                name="name"
+                                required
+                                className="custom-input"
+                            />
+                            <Form.Label>שם מלא*</Form.Label>
+                        </div>
+
+                        <div className="input-box">
+              <span className="icon">
+                <MdCall />
+              </span>
+                            <FormControl
+                                type="number"
+                                inputMode="numeric"
+                                name="phone"
+                                required
+                                className="custom-input"
+                            />
+                            <Form.Label>מספר טלפון נייד*</Form.Label>
+                        </div>
+
+                        <div className="input-box">
+              <span className="icon">
+                <MdMail />
+              </span>
+                            <FormControl
+                                type="email"
                                 name="email"
                                 required
                                 className="custom-input"
                             />
                             <Form.Label>דואר אלקטרוני*</Form.Label>
-                            <span className="icon">
-                  <MdMail />
-                </span>
                         </div>
+
                         <div className="input-box">
-                <span className="icon">
-                  <MdLock />
-                </span>
+              <span className="icon">
+                <MdLock />
+              </span>
                             <FormControl
                                 type="password"
+                                name="password"
                                 required
                                 className="custom-input"
                             />
                             <Form.Label>סיסמא*</Form.Label>
                         </div>
-                        <div className="remember-forget">
-                            <a href="/password-recovery">
-                                {" "}
-                                שיחזור סיסמא
-                            </a>
-                            <Form.Check type="checkbox" label="זכור אותי" />
+
+                        <div className="input-box">
+              <span className="icon">
+                <MdLock />
+              </span>
+                            <FormControl
+                                type="password"
+                                name="confirmPass"
+                                required
+                                className="custom-input"
+                            />
+                            <Form.Label>אישור סיסמא*</Form.Label>
                         </div>
 
                         <Button type="submit" className="btn-login">
-                            כניסה
+                            יצירת חשבון חדש
                         </Button>
 
                         <div className="endForm-div">
                             <p>
-                                {" "}
-                                עדיין לא רשום?{" "}
-                                <a href="/signup" className="register-link">
-                                    {" "}
-                                    הרשם
-                                </a>{" "}
+                                כבר רשום?{" "}
+                                <a href="/login" className="register-link">
+                                    התחברות
+                                </a>
                             </p>
                         </div>
                     </Form>
@@ -101,4 +134,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Signup;
