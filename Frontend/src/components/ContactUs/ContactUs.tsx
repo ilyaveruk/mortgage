@@ -79,7 +79,7 @@ const ContactUs: React.FC = () => {
         );
     }
     return (
-        <div>
+        <div style={{padding: '51px 0' }}>
             {location.pathname === '/large-loan' && <h1 className=" text-success">נא ליצור קשר</h1>}
             <h1 className="p-3 ">טופס יצירת קשר</h1>
             <Divider/>

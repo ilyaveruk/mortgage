@@ -32,7 +32,8 @@ const Dashboard: React.FC<DashboardProps> = ({children}) => {
 
     return (
         <div>
-            <Navbar  className="p-4 shadow custom-navbar" sticky={"top"}>
+            <Navbar  className="p-1 custom-navbar" sticky={"top"}>
+
                 <Button  onClick={handleShow} className="custom-nav-btn">
                     <FaBars/>
                 </Button>
@@ -40,10 +41,16 @@ const Dashboard: React.FC<DashboardProps> = ({children}) => {
                     : 'משתמש אנונימי'} <FaUser
                     size={24}/>
                 </Navbar.Text>
-                {username ? <Button variant="outline-danger" className="mx-3" onClick={handleLogout}>Logout</Button> :
-                    <Button variant="outline-success" className="mx-3" href="/login">התחבר</Button>}
+
+                <Button
+                    className="login-btn mx-3"
+                    onClick = {username ? handleLogout : undefined}
+                    href = {!username ? "/login" : undefined}
+                    >
+                    {username ? "התנתק" : "התחבר"}
+                </Button>
             </Navbar>
-            <div style={{display: 'flex', flexDirection: 'row'}}>
+            <div style={{ display: 'flex', flexDirection: 'row'}}>
                 <div style={{flex: 1}}>
                     {children}
                 </div>

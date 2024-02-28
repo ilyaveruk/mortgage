@@ -1,17 +1,50 @@
+.navbar-text {
+    color: rgb(24, 66, 67);
+}
 
 .custom-navbar{
     margin-left: auto;
     background-color: rgba(73, 117, 118, 0.3);
+    position: fixed;
+    width: 100%;
 }
 .custom-nav-btn{
+    color: rgba(73, 117, 118, 1.0);
     margin-left: auto;
-    background-color: rgba(73, 117, 118, 1.0);
-    border-color: rgba(73, 117, 118, 1.0);
+    border-radius: 10%;
+    width: 7vw;
+    background-color: rgba(73, 117, 118, 0);
+    border-color: rgba(73, 117, 118, 0);
 }
 .custom-nav-btn:hover{
-    background-color: rgba(73, 117, 118, 0.5);
+    color: rgb(24, 66, 67);
+    background-color: rgba(73, 117, 118, 0);
+    border-color: rgba(73, 117, 118, 0);
+}
+.custom-nav-btn:hover:active{
+    color: rgb(24, 66, 67);
+    background-color: rgba(73, 117, 118, 0);
+    border-color: rgba(73, 117, 118, 0);
+}
+
+.login-btn {
+    color: rgb(24, 66, 67);
+    background-color: rgba(73, 117, 118, 0.2);
     border-color: rgba(73, 117, 118, 0.5);
 }
+
+.login-btn:hover {
+    color: rgb(24, 66, 67);
+    background-color: rgba(73, 117, 118, 0.5);
+    border-color: rgba(73, 117, 118, 0.7);
+}
+
+.login-btn:hover:active {
+    color: rgb(24, 66, 67);
+    background-color: rgba(73, 117, 118, 0.8);
+    border-color: rgba(73, 117, 118, 0.8);
+}
+
 .custom-nav-title{
     display: flex;
     justify-content: center;

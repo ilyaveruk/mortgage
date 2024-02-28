@@ -44,7 +44,7 @@ const Signup = () => {
     }
 
     return (
-        <Container>
+        <Container  style={{padding: '65px 0' }}>
             <Container id="signUpWrapper" className="signup-wrapper">
                 <div className="form-box signin">
                     <h1>משתמש חדש</h1>

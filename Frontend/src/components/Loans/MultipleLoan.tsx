@@ -7,7 +7,7 @@ const MultipleLoan = () => {
     const boxTexts = ['Box 1 Text', 'Box 2 Text', 'Box 3 Text', 'Box 4 Text'];
 
     return (
-        <div>
+        <div style={{padding: '51px 0' }}>
             <Row className="text-center">
                 {boxTexts.map((text, index) => (
                     <Col key={index} xs={6} md={3}>

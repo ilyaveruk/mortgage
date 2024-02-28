@@ -27,7 +27,7 @@ const PassRecovery = () => {
 
 
     return (
-        <Container>
+        <Container  style={{padding: '65px 0' }}>
             {mode === "passRecovery" && (
                 <Container id="passRecoverWrapper" className="wrapper">
                     <div className="form-box recover">
