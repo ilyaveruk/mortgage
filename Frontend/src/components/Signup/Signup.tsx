@@ -4,7 +4,8 @@ import {MdPerson, MdCall, MdMail, MdLock} from "react-icons/md";
 import "./Signup.css";
 import {UserContext} from "../Context/UserContext"; // import the context
 import {useNavigate} from "react-router-dom";
-import {displayError} from "../../utils/utils";
+import {displayError,isValidEmail} from "../../utils/utils";
+import axios from "axios";
 
 let errorDisplayed: boolean = false;
 
@@ -15,25 +16,51 @@ const Signup = () => {
     const validateSignUp = (event: React.FormEvent<HTMLFormElement>): void => {
         // Prevent the default form submission behavior
         event.preventDefault();
-        // Get email and password input elements and values:
+
+        // Get form input elements and values:
+        const nameInput = document.querySelector<HTMLInputElement>('input[name="name"]');
+        const nameValue = nameInput?.value || "";
+
+        const phoneInput = document.querySelector<HTMLInputElement>('input[name="phone"]');
+        const phoneValue = phoneInput?.value || "";
+
         const emailInput = document.querySelector<HTMLInputElement>('input[name="email"]');
         const emailValue = emailInput?.value || "";
+
+        const passwordInput = document.querySelector<HTMLInputElement>('input[name="password"]');
+        const passwordValue = passwordInput?.value || "";
+
+        const confirmPassInput = document.querySelector<HTMLInputElement>('input[name="confirmPass"]');
+        const confirmPassValue = confirmPassInput?.value || "";
+
         // Perform validation if email is according to the rule.
         if (!isValidEmail(emailValue)) {
             displayError("Invalid email address", emailInput!, errorDisplayed);
             return;
         }
-        //TODO: send data to backend
 
-        setUsername(emailValue);
-        localStorage.setItem("username", emailValue);
-        navigate("/");
+        // Check if passwords match
+        if (passwordValue !== confirmPassValue) {
+            displayError("Passwords do not match", confirmPassInput!, errorDisplayed);
+            return;
+        }
+
+        // Send data to backend
+        axios.post('http://localhost:3002/register', {
+            name: nameValue,
+            phone: phoneValue,
+            email: emailValue,
+            password: passwordValue
+        })
+            .then(() => {
+                setUsername(emailValue);
+                localStorage.setItem("username", emailValue);
+                navigate("/");
+            })
+            .catch(error => {
+                console.error('Error registering user', error);
+            });
     };
-
-    // Email validation rules
-    function isValidEmail(email: string): boolean {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
 
     // Display timed error message to user
 

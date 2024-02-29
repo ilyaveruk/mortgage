@@ -4,7 +4,8 @@ import {MdMail, MdLock} from "react-icons/md";
 import "./Login.css";
 import {UserContext} from "../Context/UserContext"; // import the context
 import {useNavigate} from "react-router-dom";
-import {displayError, isValidEmail} from "../../utils/utils";
+import axios from "axios";
+import {displayError} from "../../utils/utils";
 const Login = () => {
     const {setUsername} = useContext(UserContext);
     const navigate = useNavigate();
@@ -24,30 +25,23 @@ const Login = () => {
         );
         const passwordValue = passwordInput?.value || "";
 
+        console.log(emailValue, passwordValue);
+        // Send data to backend
+        axios.post('http://localhost:3002/login', {
+            email: emailValue,
+            password: passwordValue
 
-        // Perform validation if email and password are according to the rules.
-        if (!isValidEmail(emailValue)) {
-            displayError("Invalid email address", emailInput! , errorDisplayed);
-            return;
-        }
-
-        // User Authentication
-        if (!userAuthentication(emailValue, passwordValue)) {
-            window.alert('User do not exists!');
-
-        } else {
-            setUsername(emailValue);
-            localStorage.setItem("username", emailValue);
-            navigate("/");
-        }
+        })
+            .then(() => {
+                setUsername(emailValue);
+                localStorage.setItem("username", emailValue);
+                navigate("/");
+            })
+            .catch(error => {
+                displayError("Sorry..This user does not exist", passwordInput!, errorDisplayed);
+            });
     };
 
-    // Authentication of user
-    function userAuthentication(email: string, password: string): boolean {
-        // send user info to backend and recive respond
-        //............
-        return true;
-    }
 
 
     return (

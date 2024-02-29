@@ -4,11 +4,12 @@ import {MdMail, MdLock} from "react-icons/md";
 import "./PassRecovery.css";
 import {useNavigate} from "react-router-dom";
 import {isValidEmail, displayError} from "../../utils/utils";
-
+import axios from "axios";
 
 
 const PassRecovery = () => {
     const [mode, setMode] = useState("passRecovery");
+    const [email, setEmail] = useState("");
     const navigate = useNavigate();
     let errorDisplayed: boolean = false;
     // Validate email for password recovery form
@@ -20,41 +21,54 @@ const PassRecovery = () => {
             'input[name="email"]'
         );
         const emailValue = emailInput?.value || "";
+        setEmail(emailValue);
         // Perform validation if email and password are according to the rules.
         if (!isValidEmail(emailValue)) {
             displayError("Invalid email address", emailInput!, errorDisplayed);
             return;
         }
-        // User Authentication
-        if (!userMailAuthentication(emailValue)) {
-            window.alert('User email do not exists!');
 
-        } else {
-            //move to next window.
-            setMode("newPassChange");
-        }
+        // Send data to backend
+        axios.post('http://localhost:3002/recovery', {
+            email: emailValue
+        })
+            .then(() => {
 
-        // Authentication of user
-        function userMailAuthentication(email: string): boolean {
-            // send user email to backend and recive respond
-            //............
-            return true;
-        }
+                setMode("newPassChange");
+            })
+            .catch(error => {
+                displayError("Sorry..This user does not exist", emailInput!, errorDisplayed);
+            });
 
     };
 // Validate New password change form
     const validatePasswordChange = (event: React.FormEvent<HTMLFormElement>) => {
+
         event.preventDefault();
-        // Get email and password input elements and values:
-        const passwordInput = document.querySelector<HTMLInputElement>('input[type="password"]');
+        // Get password and confirmation password input elements and values:
+        const passwordInput = document.querySelector<HTMLInputElement>('input[name="password"]');
         const passwordValue = passwordInput?.value || "";
-        const confirmPassInput = document.querySelector<HTMLInputElement>('input[type="confirmPass"]');
+        const confirmPassInput = document.querySelector<HTMLInputElement>('input[name="confirmPass"]');
         const confirmPassValue = confirmPassInput?.value || "";
 
-        //TODO: send new password to backend and receive respond.
-        //....
-        //Returns the user to the login screen (after successfully user password changed)
-        navigate("/");
+        // Check if the new password and the confirmation password are the same
+        if (passwordValue !== confirmPassValue) {
+            displayError("Passwords do not match", confirmPassInput!, errorDisplayed);
+            return;
+        }
+
+        // Send new password to backend
+        axios.post('http://localhost:3002/change-password', {
+            email: email,
+            password: passwordValue
+        })
+            .then(() => {
+                // Returns the user to the login screen (after successfully user password changed)
+                navigate("/");
+            })
+            .catch(error => {
+                displayError("Error changing password", passwordInput!, errorDisplayed);
+            });
     };
 
     // Display error message to user

@@ -3,6 +3,7 @@ import Divider from "../Utils/Divider";
 import {Alert, Button, Col, Form, Row} from "react-bootstrap";
 import {useLocation} from "react-router-dom";
 import "./ContactUs.css";
+
 const ContactUs: React.FC = () => {
 
     const [firstName, setFirstName] = useState("");
@@ -79,7 +80,7 @@ const ContactUs: React.FC = () => {
         );
     }
     return (
-        <div style={{padding: '51px 0' }}>
+        <div style={{padding: '51px 0'}}>
             {location.pathname === '/large-loan' && <h1 className=" text-success">נא ליצור קשר</h1>}
             <h1 className="p-3 ">טופס יצירת קשר</h1>
             <Divider/>
