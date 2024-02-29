@@ -49,7 +49,7 @@ const ContactUs: React.FC = () => {
                 info: info,
             }),
         };
-        fetch("http://localhost:3001/sendmail", requestOptions)
+        fetch("http://localhost:3002/sendmail", requestOptions)
             .then((response) => response)
             .then(() => setCheckMail(true))
             .catch(() => {
@@ -59,7 +59,7 @@ const ContactUs: React.FC = () => {
 
     if (errorMail) {
         return (
-            <Alert variant="danger" dismissible>
+            <Alert variant="danger" dismissible className="m-5">
                 <Alert.Heading>אופס! נראה שאירעה שגיאה..</Alert.Heading>
                 <p>
                     נסה שוב מאוחר יותר
@@ -70,7 +70,7 @@ const ContactUs: React.FC = () => {
 
     if (checkMail) {
         return (
-            <Alert variant="success">
+            <Alert variant="success" className="m-5">
                 <Alert.Heading>תודה רבה! בקשתך התקבלה!</Alert.Heading>
                 <p>
                     ברגע שנטפל בבקשתך נחזור אליך, המשך יום טוב!
@@ -79,7 +79,7 @@ const ContactUs: React.FC = () => {
         );
     }
     return (
-        <div>
+        <div style={{padding: '51px 0' }}>
             {location.pathname === '/large-loan' && <h1 className=" text-success">נא ליצור קשר</h1>}
             <h1 className="p-3 ">טופס יצירת קשר</h1>
             <Divider/>

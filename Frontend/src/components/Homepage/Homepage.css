@@ -1,4 +1,65 @@
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    background-color: #000;
+.carousel-img {
+    display: block;
+    margin: auto;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    filter: brightness(0.7);
+}
+
+.bank-img {
+    display: block;
+    margin: auto;
+    width: 100%;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: rgba(24, 66, 67, 0);
+    opacity: 90%;
+}
+
+.carousel-indicators [data-bs-target] {
+    border-radius: 100%;
+    border: 2px solid rgba(255, 255, 255, 0.75);
+    background: 0 0;
+    width: 10px;
+    height: 10px;
+}
+
+.carousel-indicators [data-bs-target]:hover {
+    border-radius: 100%;
+    border: 2px solid #ffffff;
+    background: 0 0 rgba(255, 255, 255, 0.5);
+    width: 10px;
+    height: 10px;
+}
+
+.carousel-caption {
+    top: 40%;
+    bottom: auto;
+}
+
+.custom-btn {
+    /*color: rgb(24, 66, 67);*/
+    border-radius: 25px;
+    background-color: rgba(73, 117, 118, 0.8);
+    border-color: rgba(73, 117, 118, 0.5);
+}
+
+.custom-btn:hover {
+    /*color: rgb(24, 66, 67);*/
+    background-color: rgba(73, 117, 118, 0.4);
+    border-color: rgba(73, 117, 118, 0);
+}
+
+.custom-btn:hover:active {
+    /*color: rgb(24, 66, 67);*/
+    background-color: rgba(73, 117, 118, 0.8);
+    border-color: rgba(73, 117, 118, 0);
+}
+
+h1 {
+    font-family: "Rubik", sans-serif;
+    font-size: 36px;
+    padding-bottom: 15px;
 }

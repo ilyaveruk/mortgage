@@ -1,37 +1,29 @@
-import React, { useContext } from "react";
-import { Container, Form, FormControl, Button } from "react-bootstrap";
-import { MdPerson, MdCall, MdMail, MdLock } from "react-icons/md";
+import React, {useContext} from "react";
+import {Container, Form, FormControl, Button} from "react-bootstrap";
+import {MdPerson, MdCall, MdMail, MdLock} from "react-icons/md";
 import "./Signup.css";
-import { UserContext } from "../Context/UserContext"; // import the context
-import { useNavigate } from "react-router-dom";
+import {UserContext} from "../Context/UserContext"; // import the context
+import {useNavigate} from "react-router-dom";
+import {displayError} from "../../utils/utils";
+
+let errorDisplayed: boolean = false;
 
 const Signup = () => {
-    const { setUsername } = useContext(UserContext);
+    const {setUsername} = useContext(UserContext);
     const navigate = useNavigate();
 
     const validateSignUp = (event: React.FormEvent<HTMLFormElement>): void => {
         // Prevent the default form submission behavior
         event.preventDefault();
-
         // Get email and password input elements and values:
-        const emailInput = document.querySelector<HTMLInputElement>(
-            'input[name="email"]'
-        );
+        const emailInput = document.querySelector<HTMLInputElement>('input[name="email"]');
         const emailValue = emailInput?.value || "";
-        const passwordInput = document.querySelector<HTMLInputElement>(
-            'input[type="password"]'
-        );
-        const passwordValue = passwordInput?.value || "";
-
-        // Check if email or password is empty (let the form handle it).
-        if (!emailValue || !passwordValue) return;
-
-        // Perform validation if email and password are according to the rules.
+        // Perform validation if email is according to the rule.
         if (!isValidEmail(emailValue)) {
-            //displayError("Invalid email address", emailInput!);
-            console.log("error email");
+            displayError("Invalid email address", emailInput!, errorDisplayed);
             return;
         }
+        //TODO: send data to backend
 
         setUsername(emailValue);
         localStorage.setItem("username", emailValue);
@@ -43,6 +35,8 @@ const Signup = () => {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
+    // Display timed error message to user
+
     return (
         <Container>
             <Container id="signUpWrapper" className="signup-wrapper">
@@ -51,7 +45,7 @@ const Signup = () => {
                     <Form onSubmit={validateSignUp}>
                         <div className="input-box">
               <span className="icon">
-                <MdPerson />
+                <MdPerson/>
               </span>
                             <FormControl
                                 type="text"
@@ -64,7 +58,7 @@ const Signup = () => {
 
                         <div className="input-box">
               <span className="icon">
-                <MdCall />
+                <MdCall/>
               </span>
                             <FormControl
                                 type="number"
@@ -78,7 +72,7 @@ const Signup = () => {
 
                         <div className="input-box">
               <span className="icon">
-                <MdMail />
+                <MdMail/>
               </span>
                             <FormControl
                                 type="email"
@@ -91,7 +85,7 @@ const Signup = () => {
 
                         <div className="input-box">
               <span className="icon">
-                <MdLock />
+                <MdLock/>
               </span>
                             <FormControl
                                 type="password"
@@ -104,7 +98,7 @@ const Signup = () => {
 
                         <div className="input-box">
               <span className="icon">
-                <MdLock />
+                <MdLock/>
               </span>
                             <FormControl
                                 type="password"

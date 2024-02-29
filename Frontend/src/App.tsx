@@ -21,6 +21,10 @@ function App() {
 
     return (
         <UserContext.Provider value={{username, setUsername}}>
+            <style>
+                @import
+                url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap')
+            </style>
             <div className="App">
                 <BrowserRouter>
                     <Routes>
@@ -32,8 +36,10 @@ function App() {
                         <Route path="/password-recovery" element={<Dashboard><PassRecovery/></Dashboard>}/>
                         <Route path="/contact-us" element={<Dashboard><ContactUs/></Dashboard>}/>
                         <Route path="/large-loan" element={<Dashboard><ContactUs/></Dashboard>}/>
-                        <Route path="/check-loan" element={<Dashboard><MortgagePage><MortgageForm/></MortgagePage></Dashboard>}/>
-                        <Route path="/profitability-table" element={<Dashboard><MortgagePage><MortgageTable/></MortgagePage></Dashboard>}/>
+                        <Route path="/check-loan"
+                               element={<Dashboard><MortgagePage><MortgageForm/></MortgagePage></Dashboard>}/>
+                        <Route path="/profitability-table"
+                               element={<Dashboard><MortgagePage><MortgageTable/></MortgagePage></Dashboard>}/>
                     </Routes>
                 </BrowserRouter>
             </div>

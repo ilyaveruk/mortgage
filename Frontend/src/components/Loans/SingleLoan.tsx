@@ -29,7 +29,7 @@ const SingleLoan = () => {
     };
 
     return (
-        <div>
+        <div style={{padding: '51px 0' }}>
             <h1 className="text-center p-3">הלוואה פרטית</h1>
             <Divider/>
             <Form className="custom-form-loan">

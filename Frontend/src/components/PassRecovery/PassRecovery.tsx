@@ -1,29 +1,63 @@
-import React, { useState } from "react";
-import { Container, Form, FormControl, Button } from "react-bootstrap";
-import {  MdMail, MdLock } from "react-icons/md";
+import React, {useState} from "react";
+import {Container, Form, FormControl, Button} from "react-bootstrap";
+import {MdMail, MdLock} from "react-icons/md";
 import "./PassRecovery.css";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import {isValidEmail, displayError} from "../../utils/utils";
+
+
 
 const PassRecovery = () => {
     const [mode, setMode] = useState("passRecovery");
     const navigate = useNavigate();
-
+    let errorDisplayed: boolean = false;
+    // Validate email for password recovery form
     const validatePassRecovery = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         // Add your login validation logic here
-        //...
-        setMode("newPassChange");
-    };
+        // Get email and password input elements and values:
+        const emailInput = document.querySelector<HTMLInputElement>(
+            'input[name="email"]'
+        );
+        const emailValue = emailInput?.value || "";
+        // Perform validation if email and password are according to the rules.
+        if (!isValidEmail(emailValue)) {
+            displayError("Invalid email address", emailInput!, errorDisplayed);
+            return;
+        }
+        // User Authentication
+        if (!userMailAuthentication(emailValue)) {
+            window.alert('User email do not exists!');
 
+        } else {
+            //move to next window.
+            setMode("newPassChange");
+        }
+
+        // Authentication of user
+        function userMailAuthentication(email: string): boolean {
+            // send user email to backend and recive respond
+            //............
+            return true;
+        }
+
+    };
+// Validate New password change form
     const validatePasswordChange = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        // Add your login validation logic here
+        // Get email and password input elements and values:
+        const passwordInput = document.querySelector<HTMLInputElement>('input[type="password"]');
+        const passwordValue = passwordInput?.value || "";
+        const confirmPassInput = document.querySelector<HTMLInputElement>('input[type="confirmPass"]');
+        const confirmPassValue = confirmPassInput?.value || "";
 
+        //TODO: send new password to backend and receive respond.
+        //....
         //Returns the user to the login screen (after successfully user password changed)
-        //setUsername(emailValue);
-        //localStorage.setItem("username", emailValue);
         navigate("/");
     };
+
+    // Display error message to user
 
 
     return (
@@ -35,7 +69,7 @@ const PassRecovery = () => {
                         <Form className="form-group" onSubmit={validatePassRecovery}>
                             <div className="input-box">
                 <span className="icon">
-                  <MdMail />
+                  <MdMail/>
                 </span>
                                 <FormControl
                                     type="email"
@@ -60,7 +94,7 @@ const PassRecovery = () => {
                         <Form className="form-group" onSubmit={validatePasswordChange}>
                             <div className="input-box">
                 <span className="icon">
-                  <MdLock />
+                  <MdLock/>
                 </span>
                                 <FormControl
                                     type="password"
@@ -73,7 +107,7 @@ const PassRecovery = () => {
 
                             <div className="input-box">
                 <span className="icon">
-                  <MdLock />
+                  <MdLock/>
                 </span>
                                 <FormControl
                                     type="password"

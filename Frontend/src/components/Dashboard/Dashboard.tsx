@@ -1,4 +1,4 @@
-import React, {ReactNode,  useEffect, useState} from 'react';
+import React, {ReactNode, useEffect, useState} from 'react';
 import {Navbar, Nav, NavDropdown, Offcanvas, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
 import {FaBars, FaHome, FaUser} from 'react-icons/fa';
 import './Dashboard.css';
@@ -32,24 +32,29 @@ const Dashboard: React.FC<DashboardProps> = ({children}) => {
 
     return (
         <div>
-            <Navbar  className="p-4 shadow custom-navbar" >
-                <Button  onClick={handleShow} className="custom-nav-btn">
+            <Navbar className="p-1 custom-navbar" sticky={"top"}>
+                <Button onClick={handleShow} className="custom-nav-btn">
                     <FaBars/>
                 </Button>
                 <Navbar.Text style={{fontSize: 18, fontWeight: "bold"}}>{username ? username
                     : 'משתמש אנונימי'} <FaUser
                     size={24}/>
                 </Navbar.Text>
-                {username ? <Button variant="outline-danger" className="mx-3" onClick={handleLogout}>Logout</Button> :
-                    <Button variant="outline-success" className="mx-3" href="/login">התחבר</Button>}
+                <Button
+                    className="login-btn mx-3"
+                    onClick={username ? handleLogout : undefined}
+                    href={!username ? "/login" : undefined}
+                >
+                    {username ? "התנתק" : "התחבר"}
+                </Button>
             </Navbar>
-            <div style={{display: 'flex', flexDirection: 'row', margin: 20}}>
+            <div style={{display: 'flex', flexDirection: 'row'}}>
                 <div style={{flex: 1}}>
                     {children}
                 </div>
                 <Offcanvas show={show} onHide={handleClose} bg="primary" placement="end">
                     <Offcanvas.Header className="custom-nav-title">
-                        <Offcanvas.Title className="text-icon" >
+                        <Offcanvas.Title className="text-icon">
                             <FaHome/> תפריט
                         </Offcanvas.Title>
                     </Offcanvas.Header>
@@ -60,13 +65,14 @@ const Dashboard: React.FC<DashboardProps> = ({children}) => {
                                 <NavDropdown.Item href="/check-loan">רוצה לבדוק איפה הכי כדאי לי לקחת
                                     משכנתא</NavDropdown.Item>
                             </NavDropdown>
-                            <NavDropdown className="custom-nav-link"  title="מעוניין לקחת הלוואה רגילה" id="loan-options">
+                            <NavDropdown className="custom-nav-link" title="מעוניין לקחת הלוואה רגילה"
+                                         id="loan-options">
                                 <NavDropdown title="מעוניין לקחת הלוואה עד 100 אלף שח" id="loan-options">
                                     <OverlayTrigger
                                         placement="left"
                                         delay={{show: 250, hide: 400}}
                                         overlay={renderTooltip}>
-                                        <NavDropdown.Item  href="/single-loan">אני מעוניין לקחת הלוואה
+                                        <NavDropdown.Item href="/single-loan">אני מעוניין לקחת הלוואה
                                             אחת</NavDropdown.Item>
                                     </OverlayTrigger>
                                     <OverlayTrigger

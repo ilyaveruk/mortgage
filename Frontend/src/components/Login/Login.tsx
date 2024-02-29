@@ -1,13 +1,14 @@
-import React, { useContext } from "react";
-import { Container, Form, FormControl, Button } from "react-bootstrap";
-import { MdMail, MdLock } from "react-icons/md";
+import React, {useContext} from "react";
+import {Container, Form, FormControl, Button} from "react-bootstrap";
+import {MdMail, MdLock} from "react-icons/md";
 import "./Login.css";
-import { UserContext } from "../Context/UserContext"; // import the context
-import { useNavigate } from "react-router-dom";
-
+import {UserContext} from "../Context/UserContext"; // import the context
+import {useNavigate} from "react-router-dom";
+import {displayError, isValidEmail} from "../../utils/utils";
 const Login = () => {
-    const { setUsername } = useContext(UserContext);
+    const {setUsername} = useContext(UserContext);
     const navigate = useNavigate();
+    let errorDisplayed: boolean = false;
 
     const validateLogin = (event: React.FormEvent<HTMLFormElement>): void => {
         // Prevent the default form submission behavior
@@ -23,29 +24,34 @@ const Login = () => {
         );
         const passwordValue = passwordInput?.value || "";
 
-        // Check if email or password is empty (let the form handle it).
-        if (!emailValue || !passwordValue) return;
 
         // Perform validation if email and password are according to the rules.
         if (!isValidEmail(emailValue)) {
-            //displayError("Invalid email address", emailInput!);
-            console.log("error email");
+            displayError("Invalid email address", emailInput! , errorDisplayed);
             return;
         }
 
-        setUsername(emailValue);
-        localStorage.setItem("username", emailValue);
+        // User Authentication
+        if (!userAuthentication(emailValue, passwordValue)) {
+            window.alert('User do not exists!');
 
-        navigate("/");
+        } else {
+            setUsername(emailValue);
+            localStorage.setItem("username", emailValue);
+            navigate("/");
+        }
     };
 
-    // Email validation rules
-    function isValidEmail(email: string): boolean {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    // Authentication of user
+    function userAuthentication(email: string, password: string): boolean {
+        // send user info to backend and recive respond
+        //............
+        return true;
     }
 
+
     return (
-        <Container>
+        <Container style={{padding: '65px 0'}}>
             <Container id="loginWrapper" className="wrapper">
                 <div className="form-box login">
                     <h1>כניסה לחשבון שלי</h1>
@@ -59,26 +65,19 @@ const Login = () => {
                             />
                             <Form.Label>דואר אלקטרוני*</Form.Label>
                             <span className="icon">
-                  <MdMail />
-                </span>
+                <MdMail/>
+              </span>
                         </div>
                         <div className="input-box">
-                <span className="icon">
-                  <MdLock />
-                </span>
-                            <FormControl
-                                type="password"
-                                required
-                                className="custom-input"
-                            />
+              <span className="icon">
+                <MdLock/>
+              </span>
+                            <FormControl type="password" required className="custom-input"/>
                             <Form.Label>סיסמא*</Form.Label>
                         </div>
                         <div className="remember-forget">
-                            <a href="/password-recovery">
-                                {" "}
-                                שיחזור סיסמא
-                            </a>
-                            <Form.Check type="checkbox" label="זכור אותי" />
+                            <a href="/password-recovery"> שיחזור סיסמא</a>
+                            <Form.Check type="checkbox" label="זכור אותי"/>
                         </div>
 
                         <Button type="submit" className="btn-login">
