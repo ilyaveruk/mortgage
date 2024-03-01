@@ -2,6 +2,8 @@ import React, {ReactNode, useEffect, useState} from 'react';
 import {Navbar, Nav, NavDropdown, Offcanvas, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
 import {FaBars, FaHome, FaUser} from 'react-icons/fa';
 import './Dashboard.css';
+import {useLocation} from "react-router-dom";
+
 
 interface DashboardProps {
     children: ReactNode;
@@ -11,6 +13,8 @@ const Dashboard: React.FC<DashboardProps> = ({children}) => {
     // Replace this with the actual username
     let username = localStorage.getItem('username');
     const [show, setShow] = useState(false);
+    const location = useLocation();
+
 
     useEffect(() => {
         username = localStorage.getItem('username');
@@ -29,6 +33,10 @@ const Dashboard: React.FC<DashboardProps> = ({children}) => {
         </Tooltip>
     );
 
+    const containerStyle: React.CSSProperties =
+        location.pathname !== '/'
+            ? { display: 'flex', flexDirection: 'row', marginTop: 50 }
+            : { display: 'flex', flexDirection: 'row' };
 
     return (
         <div>
@@ -48,7 +56,9 @@ const Dashboard: React.FC<DashboardProps> = ({children}) => {
                     {username ? "התנתק" : "התחבר"}
                 </Button>
             </Navbar>
-            <div style={{display: 'flex', flexDirection: 'row'}}>
+
+                <div style={containerStyle}>
+
                 <div style={{flex: 1}}>
                     {children}
                 </div>

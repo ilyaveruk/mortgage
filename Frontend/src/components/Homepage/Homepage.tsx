@@ -14,7 +14,6 @@ import Divider from "../Utils/Divider";
 const Homepage = () => {
     return (
         <div>
-            {/*TODO: adjust interval back to 2500*/}
             <Carousel interval={2500} style={{color: "#000000"}}>
                 <Carousel.Item>
                     <img

@@ -45,7 +45,7 @@ const Login = () => {
 
 
     return (
-        <Container style={{padding: '65px 0'}}>
+        <Container>
             <Container id="loginWrapper" className="wrapper">
                 <div className="form-box login">
                     <h1>כניסה לחשבון שלי</h1>

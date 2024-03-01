@@ -2,7 +2,7 @@
     .custom-form {
         background-color: rgba(73, 117, 118, 0.2); /* Change this to your desired color */
         border-radius: 10px; /* Adjust this to your desired radius */
-        padding: 20px; /* Optional: Add some padding inside the form */
+        /*padding: 20px; !* Optional: Add some padding inside the form *!*/
         width: 90%; /* Adjust this to your desired width */
         margin: 0 auto; /* This will center the form */
     }
@@ -11,7 +11,7 @@
 .custom-form {
     background-color: rgba(73, 117, 118, 0.2); /* Change this to your desired color */
     border-radius: 10px; /* Adjust this to your desired radius */
-    padding: 20px; /* Optional: Add some padding inside the form */
+    /*padding: 20px; !* Optional: Add some padding inside the form *!*/
     margin: 0 auto; /* This will center the form */
 }
 

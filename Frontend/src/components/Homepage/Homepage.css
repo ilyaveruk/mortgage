@@ -58,7 +58,7 @@
     border-color: rgba(73, 117, 118, 0);
 }
 
-h1 {
+.carousel-caption>h1 {
     font-family: "Rubik", sans-serif;
     font-size: 36px;
     padding-bottom: 15px;

@@ -80,9 +80,9 @@ const ContactUs: React.FC = () => {
         );
     }
     return (
-        <div style={{padding: '51px 0'}}>
+        <div    >
             {location.pathname === '/large-loan' && <h1 className=" text-success">נא ליצור קשר</h1>}
-            <h1 className="p-3 ">טופס יצירת קשר</h1>
+            {location.pathname === '/large-loan' ? <h1>טופס יצירת קשר</h1> : <h1 className="p-3">טופס יצירת קשר</h1>}
             <Divider/>
             <div>
                 <Form className="custom-form">
