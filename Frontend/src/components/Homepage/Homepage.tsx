@@ -1,8 +1,8 @@
 import React from 'react';
 import {Button, Carousel, Container} from "react-bootstrap";
-import m1 from "../../Assets/images/mortgage1.jpg";
-import m2 from "../../Assets/images/mortgage2.jpg";
-import m3 from "../../Assets/images/mortgage3.jpg";
+import m1 from "../../Assets/images/mortgage1.png";
+import m2 from "../../Assets/images/mortgage2.png";
+import m3 from "../../Assets/images/mortgage3.png";
 import bg1 from "../../Assets/images/bgImage1.jpg"
 import bg2 from "../../Assets/images/bgImage2.jpg"
 import bg3 from "../../Assets/images/bgImage3.jpg"
