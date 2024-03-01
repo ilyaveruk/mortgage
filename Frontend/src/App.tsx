@@ -13,7 +13,8 @@ import MortgageTable from "./components/Mortgages/MortgageTable";
 import MortgagePage from "./components/Mortgages/MortgagePage";
 import MortgageForm from "./components/Mortgages/MortgageForm";
 import PassRecovery from "./components/PassRecovery/PassRecovery";
-import Signup from "./components/Signup/Signup"; // import the context
+import Signup from "./components/Signup/Signup";
+import {FaAccessibleIcon} from "react-icons/fa"; // import the context
 
 
 function App() {
@@ -25,6 +26,16 @@ function App() {
                 @import
                 url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap')
             </style>
+            <div style={{
+                position: 'fixed',
+                left: '10px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                backgroundColor: 'blue',
+                borderRadius: 5
+            }}>
+                <FaAccessibleIcon size={32}/>
+            </div>
             <div className="App">
                 <BrowserRouter>
                     <Routes>

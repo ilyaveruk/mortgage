@@ -20,29 +20,19 @@
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
     text-align: center;
 }
-.signup-wrapper {
-    background-color: #ffffff;
-    width: 450px;
-    height: 610px;
-    position: relative;
-    border: 2px;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
+
 .wrapper .form-box {
     width: 100%;
     padding: 40px;
 }
+
 .form-box h1 {
     font-size: 1.5em;
     text-align: center;
     color: #333; /* Dark text color */
     margin: 10px;
 }
+
 .input-box {
     position: relative;
     width: 95%;
@@ -50,6 +40,7 @@
     border-bottom: 2px solid;
     margin: 30px 0;
 }
+
 .input-box label {
     direction: rtl;
     position: absolute;
@@ -62,14 +53,17 @@
     color: black;
     transition: 0.5s;
 }
+
 .input-box input:focus ~ label,
 .input-box input:valid ~ label {
     top: -3px;
 }
+
 .custom-input:focus {
     border-color: initial; /* or any other desired color or 'initial' to remove it */
     box-shadow: none; /* Remove box shadow if present */
 }
+
 .input-box input {
     direction: rtl;
     width: calc(100%); /* Adjust width to accommodate the icon */
@@ -80,11 +74,13 @@
     font-weight: 500;
     padding: 0 0 0 65px; /* Adjust padding to create space for the icon */
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
 input[type="number"] {
     -moz-appearance: textfield;
 }
@@ -97,6 +93,7 @@ input[type="number"] {
     font-size: 1.2em;
     line-height: 57px;
 }
+
 .remember-forget {
     font-size: 1em;
     width: 95%;
@@ -104,21 +101,26 @@ input[type="number"] {
     justify-content: space-between;
     margin: 0 0 30px;
 }
+
 .remember-forget label {
     direction: rtl;
     font-weight: 600;
 }
+
 .remember-forget a {
     font-weight: 600;
     text-decoration: none;
     color: rgba(73, 117, 118, 1.0);
 }
+
 .remember-forget a:hover {
     text-decoration: underline;
 }
+
 .form-group {
     color: black;
 }
+
 .btn-login {
     width: 90%;
     height: 40px;
@@ -132,10 +134,12 @@ input[type="number"] {
     margin: auto;
     cursor: pointer;
 }
+
 .btn-login:hover {
     background-color: rgba(73, 117, 118, 0.5);
     border-color: rgba(73, 117, 118, 0.5);
 }
+
 .endForm-div {
     font-size: 1em;
     color: black;
@@ -143,11 +147,13 @@ input[type="number"] {
     font-weight: 500;
     margin: 30px 0 10px;
 }
+
 .endForm-div p a {
     text-decoration: none;
     font-weight: 600;
-    color:rgba(73, 117, 118, 1.0);
+    color: rgba(73, 117, 118, 1.0);
 }
+
 .endForm-div p a:hover {
     text-decoration: underline;
 }

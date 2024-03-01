@@ -1,13 +1,15 @@
-import React, { useContext } from "react";
-import { Container, Form, FormControl, Button } from "react-bootstrap";
-import { MdMail, MdLock } from "react-icons/md";
+import React, {useContext} from "react";
+import {Container, Form, FormControl, Button} from "react-bootstrap";
+import {MdMail, MdLock} from "react-icons/md";
 import "./Login.css";
-import { UserContext } from "../Context/UserContext"; // import the context
-import { useNavigate } from "react-router-dom";
-
+import {UserContext} from "../Context/UserContext"; // import the context
+import {useNavigate} from "react-router-dom";
+import axios from "axios";
+import {displayError} from "../../utils/utils";
 const Login = () => {
-    const { setUsername } = useContext(UserContext);
+    const {setUsername} = useContext(UserContext);
     const navigate = useNavigate();
+    let errorDisplayed: boolean = false;
 
     const validateLogin = (event: React.FormEvent<HTMLFormElement>): void => {
         // Prevent the default form submission behavior
@@ -23,26 +25,24 @@ const Login = () => {
         );
         const passwordValue = passwordInput?.value || "";
 
-        // Check if email or password is empty (let the form handle it).
-        if (!emailValue || !passwordValue) return;
+        console.log(emailValue, passwordValue);
+        // Send data to backend
+        axios.post('http://localhost:3002/login', {
+            email: emailValue,
+            password: passwordValue
 
-        // Perform validation if email and password are according to the rules.
-        if (!isValidEmail(emailValue)) {
-            //displayError("Invalid email address", emailInput!);
-            console.log("error email");
-            return;
-        }
-
-        setUsername(emailValue);
-        localStorage.setItem("username", emailValue);
-
-        navigate("/");
+        })
+            .then(() => {
+                setUsername(emailValue);
+                localStorage.setItem("username", emailValue);
+                navigate("/");
+            })
+            .catch(error => {
+                displayError("Sorry..This user does not exist", passwordInput!, errorDisplayed);
+            });
     };
 
-    // Email validation rules
-    function isValidEmail(email: string): boolean {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
+
 
     return (
         <Container  style={{padding: '65px 0' }}>
@@ -59,26 +59,19 @@ const Login = () => {
                             />
                             <Form.Label>דואר אלקטרוני*</Form.Label>
                             <span className="icon">
-                  <MdMail />
-                </span>
+                <MdMail/>
+              </span>
                         </div>
                         <div className="input-box">
-                <span className="icon">
-                  <MdLock />
-                </span>
-                            <FormControl
-                                type="password"
-                                required
-                                className="custom-input"
-                            />
+              <span className="icon">
+                <MdLock/>
+              </span>
+                            <FormControl type="password" required className="custom-input"/>
                             <Form.Label>סיסמא*</Form.Label>
                         </div>
                         <div className="remember-forget">
-                            <a href="/password-recovery">
-                                {" "}
-                                שיחזור סיסמא
-                            </a>
-                            <Form.Check type="checkbox" label="זכור אותי" />
+                            <a href="/password-recovery"> שיחזור סיסמא</a>
+                            <Form.Check type="checkbox" label="זכור אותי"/>
                         </div>
 
                         <Button type="submit" className="btn-login">

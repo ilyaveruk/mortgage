@@ -1,7 +1,9 @@
-import React, {ReactNode,  useEffect, useState} from 'react';
+import React, {ReactNode, useEffect, useState} from 'react';
 import {Navbar, Nav, NavDropdown, Offcanvas, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
 import {FaBars, FaHome, FaUser} from 'react-icons/fa';
 import './Dashboard.css';
+import {useLocation} from "react-router-dom";
+
 
 interface DashboardProps {
     children: ReactNode;
@@ -11,6 +13,8 @@ const Dashboard: React.FC<DashboardProps> = ({children}) => {
     // Replace this with the actual username
     let username = localStorage.getItem('username');
     const [show, setShow] = useState(false);
+    const location = useLocation();
+
 
     useEffect(() => {
         username = localStorage.getItem('username');
@@ -29,34 +33,38 @@ const Dashboard: React.FC<DashboardProps> = ({children}) => {
         </Tooltip>
     );
 
+    const containerStyle: React.CSSProperties =
+        location.pathname !== '/'
+            ? { display: 'flex', flexDirection: 'row', marginTop: 50 }
+            : { display: 'flex', flexDirection: 'row' };
 
     return (
         <div>
-            <Navbar  className="p-1 custom-navbar" sticky={"top"}>
-
-                <Button  onClick={handleShow} className="custom-nav-btn">
+            <Navbar className="p-1 custom-navbar" sticky={"top"}>
+                <Button onClick={handleShow} className="custom-nav-btn">
                     <FaBars/>
                 </Button>
                 <Navbar.Text style={{fontSize: 18, fontWeight: "bold"}}>{username ? username
                     : 'משתמש אנונימי'} <FaUser
                     size={24}/>
                 </Navbar.Text>
-
                 <Button
                     className="login-btn mx-3"
-                    onClick = {username ? handleLogout : undefined}
-                    href = {!username ? "/login" : undefined}
-                    >
+                    onClick={username ? handleLogout : undefined}
+                    href={!username ? "/login" : undefined}
+                >
                     {username ? "התנתק" : "התחבר"}
                 </Button>
             </Navbar>
-            <div style={{ display: 'flex', flexDirection: 'row'}}>
+
+                <div style={containerStyle}>
+
                 <div style={{flex: 1}}>
                     {children}
                 </div>
                 <Offcanvas show={show} onHide={handleClose} bg="primary" placement="end">
                     <Offcanvas.Header className="custom-nav-title">
-                        <Offcanvas.Title className="text-icon" >
+                        <Offcanvas.Title className="text-icon">
                             <FaHome/> תפריט
                         </Offcanvas.Title>
                     </Offcanvas.Header>
@@ -67,13 +75,14 @@ const Dashboard: React.FC<DashboardProps> = ({children}) => {
                                 <NavDropdown.Item href="/check-loan">רוצה לבדוק איפה הכי כדאי לי לקחת
                                     משכנתא</NavDropdown.Item>
                             </NavDropdown>
-                            <NavDropdown className="custom-nav-link"  title="מעוניין לקחת הלוואה רגילה" id="loan-options">
+                            <NavDropdown className="custom-nav-link" title="מעוניין לקחת הלוואה רגילה"
+                                         id="loan-options">
                                 <NavDropdown title="מעוניין לקחת הלוואה עד 100 אלף שח" id="loan-options">
                                     <OverlayTrigger
                                         placement="left"
                                         delay={{show: 250, hide: 400}}
                                         overlay={renderTooltip}>
-                                        <NavDropdown.Item  href="/single-loan">אני מעוניין לקחת הלוואה
+                                        <NavDropdown.Item href="/single-loan">אני מעוניין לקחת הלוואה
                                             אחת</NavDropdown.Item>
                                     </OverlayTrigger>
                                     <OverlayTrigger

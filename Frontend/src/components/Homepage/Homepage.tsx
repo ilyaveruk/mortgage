@@ -14,7 +14,6 @@ import Divider from "../Utils/Divider";
 const Homepage = () => {
     return (
         <div>
-            {/*TODO: adjust interval back to 2500*/}
             <Carousel interval={2500} style={{color: "#000000"}}>
                 <Carousel.Item>
                     <img
@@ -57,7 +56,7 @@ const Homepage = () => {
                     />
                     <Carousel.Caption>
                         <h1>הכירו את הפרטנרים שלנו</h1>
-                        <Button className="custom-btn" onClick={()=>window.scrollTo(0,700)}>לרשימת הבנקים</Button>
+                        <Button className="custom-btn" onClick={() => window.scrollTo(0, 700)}>לרשימת הבנקים</Button>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
