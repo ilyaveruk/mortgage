@@ -16,14 +16,10 @@ const MortgageForm = () => {
     const [selectedBankOption, setSelectedBankOption] = useState("");
     const [selectedPropertyOption, setSelectedPropertyOption] = useState("");
     const [selectedCitizenshipOption, setSelectedCitizenshipOption] = useState("");
-    const [loanAmount, setLoanAmount] = useState(50);
+    const [loanAmount, setLoanAmount] = useState(0);
     const [switchOn, setSwitchOn] = useState(false);
-    const [username, setUsername] = useState('');
     const navigate = useNavigate();
-
-    useEffect(() => {
-        setUsername(localStorage.getItem('username') || '');
-    }, []);
+    const [username, setUsername] = useState(() => localStorage.getItem('username') || '');
 
 
     //COMPONENT EVENT HANDLERS
@@ -71,8 +67,14 @@ const MortgageForm = () => {
      * If the terms & conditions are accepted and the loan amount is valid, returns true
      */
     const isFormComplete = () => {
-        if (!username) navigate("/login");
-        return loanAmount > 0 && switchOn;
+        console.log(username);
+        if ( !username|| username.length == 0){ navigate("/login"); return; }
+        if(!switchOn){ alert("אנא אשר את תנאי השימוש"); return; }
+        if(loanAmount <= 0) {alert("אנא בחר סכום משכנתא חוקי");return; }
+        if(!selectedBankOption) {alert("אנא בחר בנק");return; }
+        if(!selectedPropertyOption){ alert("אנא בחר סוג נכס");return; }
+        if(!selectedCitizenshipOption){ alert("אנא בחר אזרחות");return; }
+        navigate("/profitability-table");
     };
 
     return (
@@ -161,8 +163,8 @@ const MortgageForm = () => {
             </Row>
             <Row>
                 <Col>
-                    <Button className="custom-btn-mortgage" type={"submit"} disabled={!isFormComplete()}>
-                        <Link className={"text-white text-decoration-none"} to={"/profitability-table"}>חשב</Link>
+                    <Button className="custom-btn-mortgage" onClick = {isFormComplete}>
+                       חשב
                     </Button>
                 </Col>
             </Row>

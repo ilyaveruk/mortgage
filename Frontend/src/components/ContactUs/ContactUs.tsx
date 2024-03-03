@@ -10,8 +10,8 @@ const ContactUs: React.FC = () => {
     const [lastName, setLastName] = useState("");
     const [mail, setMail] = useState("");
     const [phone, setPhone] = useState("");
-    const [option, setOption] = useState("");
     const [info, setInfo] = useState("");
+    const [reason, setReason] = useState("");
     const [disabled, setDisabled] = useState(true);
     const [checkMail, setCheckMail] = useState(false);
     const [errorMail, setErrorMail] = useState(false);
@@ -20,7 +20,7 @@ const ContactUs: React.FC = () => {
     const navigate = useNavigate();
     useEffect(() => {
         setDisabled(validation());
-    }, [firstName, lastName, mail, phone, option, info]);
+    }, [firstName, lastName, mail, phone, reason, info]);
 
     const validation = () => {
         if (!username) navigate("/login");
@@ -29,7 +29,7 @@ const ContactUs: React.FC = () => {
             lastName === "" ||
             mail === "" ||
             phone === "" ||
-            option === "" ||
+            reason === "" ||
             info === ""
         ) {
             return true;
@@ -38,6 +38,9 @@ const ContactUs: React.FC = () => {
 
 
     };
+    const handleReasonSelect = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setReason(event.target.value);
+    }
 
     const sendMail = () => {
 
@@ -50,7 +53,7 @@ const ContactUs: React.FC = () => {
                 lastName: lastName,
                 mail: mail,
                 phone: phone,
-                option: option,
+                option: reason,
                 info: info,
                 userId: userId
             }),
@@ -258,10 +261,12 @@ const ContactUs: React.FC = () => {
                                 </Form.Label>
                                 <Form.Select
                                     dir="rtl"
-                                    onChange={(event) => {
-                                        setOption(event.target.value);
-                                    }}
+                                    onChange={handleReasonSelect}
+                                    value={reason}
                                 >
+                                    <option disabled value={""}>
+                                        לחץ כדי לבחור
+                                    </option>
                                     <option>זקוק להמלצה איזה בנק הכי כדאי לי</option>
                                     <option>שעות פעילות</option>
                                     <option>שאלה כללית</option>

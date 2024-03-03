@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import {Form, Button, Row, Col} from 'react-bootstrap';
 import pdfFile from "../../Assets/file_pdf.pdf"
 import Divider from "../Utils/Divider";
@@ -8,12 +8,14 @@ import {useNavigate} from "react-router-dom";
 const SingleLoan = () => {
     const [loanAmount, setLoanAmount] = useState(0);
     const [switchOn, setSwitchOn] = useState(false);
-    const [username, setUsername] = useState('');
+    const [selectedBank, setSelectedBank] = useState("");
+    const [paymentMethod, setPaymentMethod] = useState("");
+    const [selectedCitizenshipOption, setSelectedCitizenshipOption] = useState("");
+
+    const [username, setUsername] = useState(() => localStorage.getItem('username') || '');
+
     const navigate = useNavigate();
 
-    useEffect(() => {
-        setUsername(localStorage.getItem('username') || '');
-    }, []);
 
     const handleLoanAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLoanAmount(Number(event.target.value));
@@ -22,10 +24,23 @@ const SingleLoan = () => {
     const handleSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSwitchOn(event.target.checked);
     };
+    const handleBankSelect = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setSelectedBank(event.target.value);
+    };const handlePaymentMethod = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setPaymentMethod(event.target.value);
+    };
+    const handleCitizenshipSelect = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setSelectedCitizenshipOption(event.target.value);
+    };
+
 
     const isFormComplete = () => {
         if (!username) navigate("/login");
-        return loanAmount > 0 && switchOn;
+        if (!switchOn) {alert("אנא אשר את תנאי השימוש");return;}
+        if (loanAmount === 0) {alert("אנא בחר סכום הלוואה");return;}
+        if (selectedBank === "") {alert("אנא בחר בנק");return;}
+        if (paymentMethod === "") {alert("אנא בחר שיטת החזר");return;}
+        if (selectedCitizenshipOption === "") {alert("אנא בחר אזרחות");return;}
     };
 
     return (
@@ -37,7 +52,10 @@ const SingleLoan = () => {
                     <Col xs={12} md={6}>
                         <Form.Group className="m-5">
                             <Form.Label>שם בנק בו מתנהל חשבונך</Form.Label>
-                            <Form.Select>
+                            <Form.Select value={selectedBank} onChange={handleBankSelect}>
+                                <option disabled value={""}>
+                                    לחץ כדי לבחור
+                                </option>
                                 <option>בנק דיסקונט לישראל בע"מ</option>
                                 <option>בנק הפועלים בע"מ</option>
                                 <option>בנק "יהב" לעובדי המדינה בע"מ</option>
@@ -52,7 +70,7 @@ const SingleLoan = () => {
                         </Form.Group>
                     </Col>
                     <Col xs={12} md={6}>
-                        <Form.Group className="m-5">
+                    <Form.Group className="m-5">
                             <Form.Label>כמה כסף אתה מעוניין להלוות ?</Form.Label>
                             <div dir={"ltr"} className="d-flex justify-content-between align-items-center">
                                 <span>0</span>
@@ -71,29 +89,35 @@ const SingleLoan = () => {
                     <Col xs={12} md={6}>
                     <Form.Group className="m-5">
                             <Form.Label>בחר שיטת החזר רצויה</Form.Label>
-                            <Form.Select>
-                                <option>ריבית פריים</option>
-                                <option>ריבית קבועה צמודה למדד</option>
-                                <option>ריבית קבועה לא צמודה</option>
-                            </Form.Select>
-                        </Form.Group>
+                        <Form.Select value={paymentMethod} onChange={handlePaymentMethod}>
+                            <option disabled value={""}>
+                                לחץ כדי לבחור
+                            </option>
+                            <option>ריבית פריים</option>
+                            <option>ריבית קבועה צמודה למדד</option>
+                            <option>ריבית קבועה לא צמודה</option>
+                        </Form.Select>
+                    </Form.Group>
 
                     </Col>
                     <Col>
-                        <Form.Group className="m-5">
+                    <Form.Group className="m-5">
                             <Form.Label>אזרחות נוכחית</Form.Label>
-                            <Form.Select>
-                                <option>ישראלית</option>
-                                <option>אמריקאית</option>
-                                <option>אירופאית</option>
-                            </Form.Select>
-                        </Form.Group>
+                        <Form.Select value={selectedCitizenshipOption} onChange={handleCitizenshipSelect}>
+                            <option disabled value={""}>
+                                לחץ כדי לבחור
+                            </option>
+                            <option>ישראלית</option>
+                            <option>אמריקאית</option>
+                            <option>אירופאית</option>
+                        </Form.Select>
+                    </Form.Group>
 
                     </Col>
                 </Row>
                 <Row>
 
-                    <Col>
+                <Col>
                         <Form.Group className="m-1">
                             <Form.Label>ידוע לי שההצעה היא רק לאומדן בלבד</Form.Label>
                             <Form.Check inline type="checkbox"/>
@@ -117,7 +141,7 @@ const SingleLoan = () => {
                     <Col>
                     </Col>
                 </Row>
-                <Button  type="submit" disabled={!isFormComplete()} className="mt-5 custom-btn-single-loan"
+                <Button  type="submit" onClick={isFormComplete} className="mt-5 custom-btn-single-loan"
                         style={{width: "100px"}}>
                     חשב
                 </Button>

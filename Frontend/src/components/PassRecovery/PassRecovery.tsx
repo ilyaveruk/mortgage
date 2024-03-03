@@ -64,6 +64,7 @@ const PassRecovery = () => {
         })
             .then(() => {
                 // Returns the user to the login screen (after successfully user password changed)
+                console.log("Password changed successfully");
                 navigate("/");
             })
             .catch(error => {
