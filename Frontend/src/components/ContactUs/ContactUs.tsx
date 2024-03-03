@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Divider from "../Utils/Divider";
 import {Alert, Button, Col, Form, Row} from "react-bootstrap";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import "./ContactUs.css";
 
 const ContactUs: React.FC = () => {
@@ -16,12 +16,14 @@ const ContactUs: React.FC = () => {
     const [checkMail, setCheckMail] = useState(false);
     const [errorMail, setErrorMail] = useState(false);
     const location = useLocation();
-
+    const username = localStorage.getItem("username");
+    const navigate = useNavigate();
     useEffect(() => {
         setDisabled(validation());
     }, [firstName, lastName, mail, phone, option, info]);
 
     const validation = () => {
+        if (!username) navigate("/login");
         if (
             firstName === "" ||
             lastName === "" ||
@@ -38,6 +40,8 @@ const ContactUs: React.FC = () => {
     };
 
     const sendMail = () => {
+
+        const userId = localStorage.getItem("userID");
         const requestOptions = {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -48,6 +52,7 @@ const ContactUs: React.FC = () => {
                 phone: phone,
                 option: option,
                 info: info,
+                userId: userId
             }),
         };
         fetch("http://localhost:3002/sendmail", requestOptions)

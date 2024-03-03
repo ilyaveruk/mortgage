@@ -18,6 +18,11 @@ const ContactSchema = new mongoose.Schema({
     },
     info: {
         type: String, required: true
+    },
+    userId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'mortgageUsers',
+        required: true
     }
 });
 

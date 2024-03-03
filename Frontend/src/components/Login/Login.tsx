@@ -32,9 +32,10 @@ const Login = () => {
             password: passwordValue
 
         })
-            .then(() => {
+            .then((result) => {
                 setUsername(emailValue);
                 localStorage.setItem("username", emailValue);
+                localStorage.setItem("userID", result.data.userId)
                 navigate("/");
             })
             .catch(error => {
