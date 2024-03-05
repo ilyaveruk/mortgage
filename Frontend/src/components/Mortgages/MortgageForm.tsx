@@ -1,8 +1,7 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import {Button, Col, Form, Row} from "react-bootstrap";
 import './MortgageForm.css';
 import pdfFile from "../../Assets/file_pdf.pdf";
-import {Link} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 
 /**
@@ -19,7 +18,7 @@ const MortgageForm = () => {
     const [loanAmount, setLoanAmount] = useState(0);
     const [switchOn, setSwitchOn] = useState(false);
     const navigate = useNavigate();
-    const [username, setUsername] = useState(() => localStorage.getItem('username') || '');
+    const username = localStorage.getItem('username') || '';
 
 
     //COMPONENT EVENT HANDLERS
@@ -68,7 +67,7 @@ const MortgageForm = () => {
      */
     const isFormComplete = () => {
         console.log(username);
-        if ( !username|| username.length == 0){ navigate("/login"); return; }
+        if ( !username|| username.length === 0){ navigate("/login"); return; }
         if(!switchOn){ alert("אנא אשר את תנאי השימוש"); return; }
         if(loanAmount <= 0) {alert("אנא בחר סכום משכנתא חוקי");return; }
         if(!selectedBankOption) {alert("אנא בחר בנק");return; }

@@ -14,7 +14,8 @@ import MortgagePage from "./components/Mortgages/MortgagePage";
 import MortgageForm from "./components/Mortgages/MortgageForm";
 import PassRecovery from "./components/PassRecovery/PassRecovery";
 import Signup from "./components/Signup/Signup";
-import {FaAccessibleIcon} from "react-icons/fa"; // import the context
+import {FaAccessibleIcon} from "react-icons/fa";
+import SingleLoanConfig from "./components/Loans/SingleLoanConfig"; // import the context
 
 
 function App() {
@@ -51,6 +52,8 @@ function App() {
                                element={<Dashboard><MortgagePage><MortgageForm/></MortgagePage></Dashboard>}/>
                         <Route path="/profitability-table"
                                element={<Dashboard><MortgagePage><MortgageTable/></MortgagePage></Dashboard>}/>
+                        <Route path="/single-loan-config" element={<Dashboard><SingleLoanConfig/></Dashboard>}/>
+
                     </Routes>
                 </BrowserRouter>
             </div>
