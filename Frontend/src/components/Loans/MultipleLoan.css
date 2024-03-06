@@ -1,11 +1,4 @@
-.arrow {
-    width: 0;
-    height: 0;
-    border-top: 20px solid transparent; /* Adjust size as needed */
-    border-bottom: 20px solid transparent; /* Adjust size as needed */
-    border-right: 40px solid black; /* Adjust size and color as needed */
-    position: absolute;
-    right: 10px;
-    top: 20%;
-    transform: translateY(-50%);
+.instruction-text-box-container {
+    margin-top: auto;
+    margin-bottom: auto;
 }
