@@ -24,7 +24,7 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post('/sendmail', async (req, res) => {
-    const {firstName, lastName, mail, phone, option, info} = req.body;
+    const {firstName, lastName, mail, phone, option, info, userId} = req.body;
 
     const newContact = new Contact({
         firstName,
@@ -32,7 +32,8 @@ app.post('/sendmail', async (req, res) => {
         mail,
         phone,
         option,
-        info
+        info,
+        userId
     });
 
     await newContact.save();
@@ -75,30 +76,38 @@ app.post('/login', async (req, res) => {
     const user = await User.findOne({email: req.body.email});
 
     if (user && user.password === req.body.password) {
-        res.status(200).send('User successfully logged in');
+
+        res.status(200).json({userId: user._id.toString()});
     } else {
         res.status(401).send('Invalid credentials');
     }
 
 });
 
-app.post('/recovery' , async (req, res) => {
+app.post('/recovery', async (req, res) => {
     const user = await User.findOne({email: req.body.email});
 
-    if(user){
+    if (user) {
         res.status(200).json({user});
     }
-});
-
-app.post('/change-password' , async (req, res) => {
-    const user = await User.findOne({email: req.body.email});
-
-    if(user){
-       await User.updateOne({email: req.body.email}, {password: req.body.password});
+    else{
+        res.status(401).send('Invalid email');
     }
 });
 
-const PORT = process.env.PORT || 3001;
+app.post('/change-password', async (req, res) => {
+    const user = await User.findOne({email: req.body.email});
+
+    if (user) {
+        await User.updateOne({email: req.body.email}, {password: req.body.password}).then(() => {
+            res.status(200).send('Password successfully changed');
+
+        });
+    }
+
+});
+
+const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => {
     DB();
     console.log(`Server running on port ${PORT}`);

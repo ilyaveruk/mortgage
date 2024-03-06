@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Divider from "../Utils/Divider";
 import {Alert, Button, Col, Form, Row} from "react-bootstrap";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import "./ContactUs.css";
 
 const ContactUs: React.FC = () => {
@@ -10,24 +10,26 @@ const ContactUs: React.FC = () => {
     const [lastName, setLastName] = useState("");
     const [mail, setMail] = useState("");
     const [phone, setPhone] = useState("");
-    const [option, setOption] = useState("");
     const [info, setInfo] = useState("");
+    const [reason, setReason] = useState("");
     const [disabled, setDisabled] = useState(true);
     const [checkMail, setCheckMail] = useState(false);
     const [errorMail, setErrorMail] = useState(false);
     const location = useLocation();
-
+    const username = localStorage.getItem("username");
+    const navigate = useNavigate();
     useEffect(() => {
         setDisabled(validation());
-    }, [firstName, lastName, mail, phone, option, info]);
+    }, [firstName, lastName, mail, phone, reason, info]);
 
     const validation = () => {
+        if (!username) navigate("/login");
         if (
             firstName === "" ||
             lastName === "" ||
             mail === "" ||
             phone === "" ||
-            option === "" ||
+            reason === "" ||
             info === ""
         ) {
             return true;
@@ -36,8 +38,13 @@ const ContactUs: React.FC = () => {
 
 
     };
+    const handleReasonSelect = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setReason(event.target.value);
+    }
 
     const sendMail = () => {
+
+        const userId = localStorage.getItem("userID");
         const requestOptions = {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -46,8 +53,9 @@ const ContactUs: React.FC = () => {
                 lastName: lastName,
                 mail: mail,
                 phone: phone,
-                option: option,
+                option: reason,
                 info: info,
+                userId: userId
             }),
         };
         fetch("http://localhost:3002/sendmail", requestOptions)
@@ -253,10 +261,12 @@ const ContactUs: React.FC = () => {
                                 </Form.Label>
                                 <Form.Select
                                     dir="rtl"
-                                    onChange={(event) => {
-                                        setOption(event.target.value);
-                                    }}
+                                    onChange={handleReasonSelect}
+                                    value={reason}
                                 >
+                                    <option disabled value={""}>
+                                        לחץ כדי לבחור
+                                    </option>
                                     <option>זקוק להמלצה איזה בנק הכי כדאי לי</option>
                                     <option>שעות פעילות</option>
                                     <option>שאלה כללית</option>

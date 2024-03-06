@@ -18,6 +18,7 @@
 .custom-btn-contact {
     background-color: rgba(73, 117, 118, 1.0);
     border-color: rgba(73, 117, 118, 1.0);
+    margin-bottom: 30px;
 }
 
 .custom-btn-contact:hover {

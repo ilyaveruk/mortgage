@@ -1,19 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import {Form, Button, Row, Col} from 'react-bootstrap';
 import pdfFile from "../../Assets/file_pdf.pdf"
 import Divider from "../Utils/Divider";
-import './SingleLoan.css';
 import {useNavigate} from "react-router-dom";
+import "./SingleLoanConfig";
+import "./SingleLoan.css";
 
 const SingleLoan = () => {
     const [loanAmount, setLoanAmount] = useState(0);
     const [switchOn, setSwitchOn] = useState(false);
-    const [username, setUsername] = useState('');
+    const [selectedBank, setSelectedBank] = useState("");
+    const [paymentMethod, setPaymentMethod] = useState("");
+    const [selectedCitizenshipOption, setSelectedCitizenshipOption] = useState("");
+
+    const username = localStorage.getItem('username') || '';
+
     const navigate = useNavigate();
 
-    useEffect(() => {
-        setUsername(localStorage.getItem('username') || '');
-    }, []);
 
     const handleLoanAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLoanAmount(Number(event.target.value));
@@ -22,22 +25,42 @@ const SingleLoan = () => {
     const handleSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSwitchOn(event.target.checked);
     };
+    const handleBankSelect = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setSelectedBank(event.target.value);
+    };const handlePaymentMethod = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setPaymentMethod(event.target.value);
+    };
+    const handleCitizenshipSelect = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setSelectedCitizenshipOption(event.target.value);
+    };
+
 
     const isFormComplete = () => {
-        if (!username) navigate("/login");
-        return loanAmount > 0 && switchOn;
+        if ( !username|| username.length === 0){ navigate("/login"); return; }
+        if (!switchOn) {alert("אנא אשר את תנאי השימוש");return;}
+        if (loanAmount === 0) {alert("אנא בחר סכום הלוואה");return;}
+        if (selectedBank === "") {alert("אנא בחר בנק");return;}
+        if (paymentMethod === "") {alert("אנא בחר שיטת החזר");return;}
+        if (selectedCitizenshipOption === "") {alert("אנא בחר אזרחות");return;}
+        navigate("/single-loan-config");
     };
 
     return (
-        <div style={{padding: '51px 0' }}>
-            <h1 className="text-center p-3">הלוואה פרטית</h1>
+        <div>
+
+            <h2 className="text-center mt-3">מעוניין לקחת הלוואה רגילה</h2>
+            <h2 className="text-center">מעוניין לקחת הלוואה עד 100 אלף ש"ח</h2>
+            <h1 className="text-success mb-2">אני מעוניין לקחת הלוואה אחת</h1>
             <Divider/>
             <Form className="custom-form-loan">
-                <Row>
+            <Row>
                     <Col xs={12} md={6}>
                         <Form.Group className="m-5">
                             <Form.Label>שם בנק בו מתנהל חשבונך</Form.Label>
-                            <Form.Select>
+                            <Form.Select value={selectedBank} onChange={handleBankSelect}>
+                                <option disabled value={""}>
+                                    לחץ כדי לבחור
+                                </option>
                                 <option>בנק דיסקונט לישראל בע"מ</option>
                                 <option>בנק הפועלים בע"מ</option>
                                 <option>בנק "יהב" לעובדי המדינה בע"מ</option>
@@ -69,9 +92,12 @@ const SingleLoan = () => {
                 </Row>
                 <Row>
                     <Col xs={12} md={6}>
-                    <Form.Group className="m-5">
+                        <Form.Group className="m-5">
                             <Form.Label>בחר שיטת החזר רצויה</Form.Label>
-                            <Form.Select>
+                            <Form.Select value={paymentMethod} onChange={handlePaymentMethod}>
+                                <option disabled value={""}>
+                                    לחץ כדי לבחור
+                                </option>
                                 <option>ריבית פריים</option>
                                 <option>ריבית קבועה צמודה למדד</option>
                                 <option>ריבית קבועה לא צמודה</option>
@@ -82,7 +108,10 @@ const SingleLoan = () => {
                     <Col>
                         <Form.Group className="m-5">
                             <Form.Label>אזרחות נוכחית</Form.Label>
-                            <Form.Select>
+                            <Form.Select value={selectedCitizenshipOption} onChange={handleCitizenshipSelect}>
+                                <option disabled value={""}>
+                                    לחץ כדי לבחור
+                                </option>
                                 <option>ישראלית</option>
                                 <option>אמריקאית</option>
                                 <option>אירופאית</option>
@@ -117,7 +146,7 @@ const SingleLoan = () => {
                     <Col>
                     </Col>
                 </Row>
-                <Button  type="submit" disabled={!isFormComplete()} className="mt-5 custom-btn-single-loan"
+                <Button type="submit" onClick={isFormComplete} className="mt-5 custom-btn-single-loan"
                         style={{width: "100px"}}>
                     חשב
                 </Button>
