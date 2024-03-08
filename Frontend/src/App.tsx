@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Accessibilik from 'accessibility-react-widget';
 import './App.css';
 import Dashboard from "./components/Dashboard/Dashboard";
 import MultipleLoan from "./components/Loans/MultipleLoan";
@@ -14,7 +15,6 @@ import MortgagePage from "./components/Mortgages/MortgagePage";
 import MortgageForm from "./components/Mortgages/MortgageForm";
 import PassRecovery from "./components/PassRecovery/PassRecovery";
 import Signup from "./components/Signup/Signup";
-import {FaAccessibleIcon} from "react-icons/fa";
 import SingleLoanConfig from "./components/Loans/SingleLoanConfig"; // import the context
 
 
@@ -27,17 +27,8 @@ function App() {
                 @import
                 url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap')
             </style>
-            <div style={{
-                position: 'fixed',
-                left: '10px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                backgroundColor: 'blue',
-                borderRadius: 5
-            }}>
-                <FaAccessibleIcon size={32}/>
-            </div>
             <div className="App">
+                <Accessibilik />
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<Dashboard><Homepage/></Dashboard>}/>

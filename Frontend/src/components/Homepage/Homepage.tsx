@@ -5,7 +5,6 @@ import m2 from "../../Assets/images/mortgage2.png";
 import m3 from "../../Assets/images/mortgage3.png";
 import bg1 from "../../Assets/images/bgImage1.jpg"
 import bg2 from "../../Assets/images/bgImage2.jpg"
-import bg3 from "../../Assets/images/bgImage3.jpg"
 import bg4 from "../../Assets/images/bgImage4.jpg"
 import bg5 from "../../Assets/images/bgImage5.jpg"
 import './Homepage.css';
