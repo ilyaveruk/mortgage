@@ -24,7 +24,7 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post('/sendmail', async (req, res) => {
-    const {firstName, lastName, mail, phone, option, info, userId} = req.body;
+    const { firstName, lastName, mail, phone, option, info, userId } = req.body;
 
     const newContact = new Contact({
         firstName,
@@ -59,7 +59,7 @@ app.post('/sendmail', async (req, res) => {
 
 
 app.post('/register', async (req, res) => {
-    const {email, password} = req.body;
+    const { email, password } = req.body;
 
     const newUser = new User({
         email,
@@ -73,11 +73,11 @@ app.post('/register', async (req, res) => {
 
 app.post('/login', async (req, res) => {
 
-    const user = await User.findOne({email: req.body.email});
+    const user = await User.findOne({ email: req.body.email });
 
     if (user && user.password === req.body.password) {
 
-        res.status(200).json({userId: user._id.toString()});
+        res.status(200).json({ userId: user._id.toString() });
     } else {
         res.status(401).send('Invalid credentials');
     }
@@ -85,26 +85,34 @@ app.post('/login', async (req, res) => {
 });
 
 app.post('/recovery', async (req, res) => {
-    const user = await User.findOne({email: req.body.email});
+    const user = await User.findOne({ email: req.body.email });
 
     if (user) {
-        res.status(200).json({user});
+        res.status(200).json({ user });
     }
-    else{
+    else {
         res.status(401).send('Invalid email');
     }
 });
 
 app.post('/change-password', async (req, res) => {
-    const user = await User.findOne({email: req.body.email});
+    const user = await User.findOne({ email: req.body.email });
 
     if (user) {
-        await User.updateOne({email: req.body.email}, {password: req.body.password}).then(() => {
+        await User.updateOne({ email: req.body.email }, { password: req.body.password }).then(() => {
             res.status(200).send('Password successfully changed');
 
         });
     }
 
+});
+
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", '*');
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+    next(createError(404));
 });
 
 const PORT = process.env.PORT || 3002;
