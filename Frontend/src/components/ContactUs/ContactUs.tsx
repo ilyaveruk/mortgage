@@ -58,7 +58,7 @@ const ContactUs: React.FC = () => {
                 userId: userId
             }),
         };
-        fetch("http://localhost:3002/sendmail", requestOptions)
+        fetch(`${process.env.BACKEND_URL}/sendmail`, requestOptions)
             .then((response) => response)
             .then(() => setCheckMail(true))
             .catch(() => {

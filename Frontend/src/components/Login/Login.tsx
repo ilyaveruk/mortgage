@@ -27,7 +27,7 @@ const Login = () => {
 
         console.log(emailValue, passwordValue);
         // Send data to backend
-        axios.post('http://localhost:3002/login', {
+        axios.post(`${process.env.BACKEND_URL}/login`, {
             email: emailValue,
             password: passwordValue
 

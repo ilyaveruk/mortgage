@@ -29,7 +29,7 @@ const PassRecovery = () => {
         }
 
         // Send data to backend
-        axios.post('http://localhost:3002/recovery', {
+        axios.post(`${process.env.BACKEND_URL}/recovery`, {
             email: emailValue
         })
             .then(() => {
@@ -58,7 +58,7 @@ const PassRecovery = () => {
         }
 
         // Send new password to backend
-        axios.post('http://localhost:3002/change-password', {
+        axios.post(`${process.env.BACKEND_URL}/change-password`, {
             email: email,
             password: passwordValue
         })

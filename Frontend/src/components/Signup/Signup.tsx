@@ -46,7 +46,7 @@ const Signup = () => {
         }
 
         // Send data to backend
-        axios.post('http://localhost:3002/register', {
+        axios.post(`${process.env.BACKEND_URL}/register`, {
             name: nameValue,
             phone: phoneValue,
             email: emailValue,
