@@ -6,6 +6,7 @@ import { UserContext } from "../Context/UserContext"; // import the context
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { displayError } from "../../utils/utils";
+import {baseurl} from "../../config";
 const Login = () => {
   console.log(process.env.REACT_APP_BACKEND_URL);
 
@@ -31,7 +32,7 @@ const Login = () => {
     console.log(emailValue, passwordValue);
     // Send data to backend
     axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
+      .post(`${baseurl}/login`, {
         email: emailValue,
         password: passwordValue,
       })

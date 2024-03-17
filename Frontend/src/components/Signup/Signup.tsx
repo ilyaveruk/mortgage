@@ -6,6 +6,7 @@ import { UserContext } from "../Context/UserContext"; // import the context
 import { useNavigate } from "react-router-dom";
 import { displayError, isValidEmail } from "../../utils/utils";
 import axios from "axios";
+import {baseurl} from "../../config";
 
 let errorDisplayed: boolean = false;
 
@@ -56,7 +57,7 @@ const Signup = () => {
 
     // Send data to backend
     axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/register`, {
+      .post(`${baseurl}/register`, {
         name: nameValue,
         phone: phoneValue,
         email: emailValue,

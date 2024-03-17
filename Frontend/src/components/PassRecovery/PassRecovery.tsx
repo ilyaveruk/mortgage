@@ -5,6 +5,7 @@ import "./PassRecovery.css";
 import { useNavigate } from "react-router-dom";
 import { isValidEmail, displayError } from "../../utils/utils";
 import axios from "axios";
+import {baseurl} from "../../config";
 
 const PassRecovery = () => {
   const [mode, setMode] = useState("passRecovery");
@@ -29,7 +30,7 @@ const PassRecovery = () => {
 
     // Send data to backend
     axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/recovery`, {
+      .post(`${baseurl}/recovery`, {
         email: emailValue,
       })
       .then(() => {
@@ -64,7 +65,7 @@ const PassRecovery = () => {
 
     // Send new password to backend
     axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/change-password`, {
+      .post(`${baseurl}/change-password`, {
         email: email,
         password: passwordValue,
       })

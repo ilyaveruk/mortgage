@@ -3,6 +3,7 @@ import Divider from "../Utils/Divider";
 import { Alert, Button, Col, Form, Row } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./ContactUs.css";
+import {baseurl} from "../../config";
 
 const ContactUs: React.FC = () => {
   const [firstName, setFirstName] = useState("");
@@ -56,7 +57,7 @@ const ContactUs: React.FC = () => {
         userId: userId,
       }),
     };
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/sendmail`, requestOptions)
+    fetch(`${baseurl}/sendmail`, requestOptions)
       .then((response) => response)
       .then(() => setCheckMail(true))
       .catch(() => {
