@@ -10,7 +10,7 @@ interface DashboardProps {
 }
 
 const Dashboard: React.FC<DashboardProps> = ({children}) => {
-    // Replace this with the actual username
+
     let username = localStorage.getItem('username');
     const [show, setShow] = useState(false);
     const location = useLocation();
@@ -20,19 +20,24 @@ const Dashboard: React.FC<DashboardProps> = ({children}) => {
         username = localStorage.getItem('username');
     }, [username]);
 
+    //handles the closing and opening functionality of the sidebar
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    //logs the current user out
     const handleLogout = () => {
         localStorage.removeItem('username');
         window.location.reload();
     };
 
+    //displays a tooltip message
     const renderTooltip = (props: React.PropsWithChildren<any>) => (
         <Tooltip id="button-tooltip" {...props}>
             אומדן בלבד.פרטי ההלואה הסופיים הם הקובעים
         </Tooltip>
     );
 
+    //adds extra vertical margin for all pages except for the homepage
     const containerStyle: React.CSSProperties =
         location.pathname !== '/'
             ? { display: 'flex', flexDirection: 'row', marginTop: 50 }

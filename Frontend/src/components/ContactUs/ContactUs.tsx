@@ -18,10 +18,13 @@ const ContactUs: React.FC = () => {
   const location = useLocation();
   const username = localStorage.getItem("username");
   const navigate = useNavigate();
+
+
   useEffect(() => {
     setDisabled(validation());
   }, [firstName, lastName, mail, phone, reason, info]);
 
+  //If all entered information is valid, returns true
   const validation = () => {
     if (!username) navigate("/login");
     if (
@@ -36,12 +39,15 @@ const ContactUs: React.FC = () => {
     }
     return !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(mail);
   };
+
+  //updates the selected contact reason
   const handleReasonSelect = (event: {
     target: { value: React.SetStateAction<string> };
   }) => {
     setReason(event.target.value);
   };
 
+  //sends the entered details via email
   const sendMail = () => {
     const userId = localStorage.getItem("userID");
     const requestOptions = {

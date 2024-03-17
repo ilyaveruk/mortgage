@@ -17,24 +17,48 @@ const SingleLoan = () => {
 
     const navigate = useNavigate();
 
-
+    /**
+     * Updates the loan amount value
+     * @param event the click event that triggered the method
+     */
     const handleLoanAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLoanAmount(Number(event.target.value));
     };
 
+    /**
+     * Alters the state of the T&C switch
+     * @param event the click event that triggered the method
+     */
     const handleSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSwitchOn(event.target.checked);
     };
+
+    /**
+     * Updates the selected bank
+     * @param event the click event that triggered the method
+     */
     const handleBankSelect = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setSelectedBank(event.target.value);
+
+    /**
+     * Updates the payment method
+     * @param event the click event that triggered the method
+     */
     };const handlePaymentMethod = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setPaymentMethod(event.target.value);
     };
+
+    /**
+     * Updates the selected citizenship
+     * @param event the click event that triggered the method
+     */
     const handleCitizenshipSelect = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setSelectedCitizenshipOption(event.target.value);
     };
 
-
+    /**
+     * If the terms & conditions are accepted and all details are valid, returns true
+     */
     const isFormComplete = () => {
         if ( !username|| username.length === 0){ navigate("/login"); return; }
         if (!switchOn) {alert("אנא אשר את תנאי השימוש");return;}

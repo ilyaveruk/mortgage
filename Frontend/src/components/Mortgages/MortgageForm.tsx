@@ -63,7 +63,7 @@ const MortgageForm = () => {
     };
 
     /**
-     * If the terms & conditions are accepted and the loan amount is valid, returns true
+     * If the terms & conditions are accepted and all details are valid, returns true
      */
     const isFormComplete = () => {
         console.log(username);
